@@ -348,9 +348,21 @@ export default function App() {
       return parseFloat(clean) || 0;
     };
     const total = cart.reduce((acc, item) => acc + parsePrice(item.product.price) * item.quantity, 0);
-    const itemsList = cart.map(item =>
-      `▪ ${item.product.name}%0A  SKU: ${item.product.sku}%0A  Price: ${item.product.price} ${item.product.unit}%0A  Qty: ${item.quantity}%0A  Subtotal: K ${(parsePrice(item.product.price) * item.quantity).toLocaleString()}`
-    ).join('%0A%0A');
+    const getAbsoluteImageUrl = (imgUrl: string) => {
+      if (!imgUrl) return "";
+      if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
+        if (imgUrl.includes("localhost")) {
+          return imgUrl.replace("localhost", window.location.hostname);
+        }
+        return imgUrl;
+      }
+      return `${window.location.protocol}//${window.location.hostname}:3001${imgUrl.startsWith("/") ? "" : "/"}${imgUrl}`;
+    };
+    const itemsList = cart.map(item => {
+      const imgUrl = getAbsoluteImageUrl(item.product.image);
+      const imgLine = imgUrl ? `%0A  Image: ${imgUrl}` : "";
+      return `▪ ${item.product.name}%0A  SKU: ${item.product.sku}%0A  Price: ${item.product.price} ${item.product.unit}%0A  Qty: ${item.quantity}%0A  Subtotal: K ${(parsePrice(item.product.price) * item.quantity).toLocaleString()}${imgLine}`;
+    }).join('%0A%0A');
     const message =
       `Hello Chamrud Enterprise! 👋%0A%0AI would like to request a quotation for the following items:%0A%0A${itemsList}%0A%0A─────────────────%0A*ESTIMATED TOTAL: K ${total.toLocaleString('en-ZM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*%0A─────────────────%0A%0APlease send me a formal quotation. Thank you!`;
     window.open(`https://wa.me/260772071404?text=${message}`, '_blank');
