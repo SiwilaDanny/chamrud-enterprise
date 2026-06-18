@@ -1,0 +1,782 @@
+[
+  {
+    "id": "p_fmdvgnuug",
+    "name": "MALARIA RDT CASSETTES PF/PV",
+    "sku": "SKU: MALA-304",
+    "price": "K 650",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_njj7kgra0",
+    "name": "MALARIA RDT CASSETTES PF",
+    "sku": "SKU: MALA-198",
+    "price": "K 200",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ammq9ytdj",
+    "name": "PREGNANT TEST (HCG) STRIPS",
+    "sku": "SKU: PREG-716",
+    "price": "K 150",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_bxf10u67h",
+    "name": "RAPID PLASMA REAGIN (RPR)",
+    "sku": "SKU: RAPI-874",
+    "price": "K 1300",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_8sqn4ok0p",
+    "name": "SYPHILIS TEST CASSETTES RPR",
+    "sku": "SKU: SYPH-624",
+    "price": "K 350",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_5w9grzx82",
+    "name": "SYPHILIS TEST STRIPS",
+    "sku": "SKU: SYPH-531",
+    "price": "K 250",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_rhcin5e9e",
+    "name": "HEPATITIS B CASSETTES",
+    "sku": "SKU: HEPA-943",
+    "price": "K 300",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_38m4acqkz",
+    "name": "HEPATITIS B STRIPS",
+    "sku": "SKU: HEPA-795",
+    "price": "K 300",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_x18m6r1jg",
+    "name": "HEPATITIS A",
+    "sku": "SKU: HEPA-836",
+    "price": "K 1300",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_2suruxe8p",
+    "name": "HEPATITIS C",
+    "sku": "SKU: HEPA-119",
+    "price": "K 850",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_68iot8wiu",
+    "name": "HEPATITIS PROFILE (A,B,C) CASSETTES",
+    "sku": "SKU: HEPA-132",
+    "price": "K 2500",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_i2yffjs2z",
+    "name": "H.PYLORI AB (BLOOD) STRIPS",
+    "sku": "SKU: HPY-900",
+    "price": "K 800",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_edg5640qw",
+    "name": "H.PYLORI AG (STOOL) CASSETTES",
+    "sku": "SKU: HPY-434",
+    "price": "K 750",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_mghfi2gzb",
+    "name": "FEACAL OCAULT BLOOD (FOB)",
+    "sku": "SKU: FEAC-565",
+    "price": "K 650",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_pt9e9rqng",
+    "name": "S.TYPHI/PARATAPHI AG",
+    "sku": "SKU: STY-403",
+    "price": "K 750",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_co1wxmm0i",
+    "name": "TYPHOID IGG/IGM CASSETTES",
+    "sku": "SKU: TYPH-2",
+    "price": "K 900",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_h0otevia1",
+    "name": "WIDAL/TYDAL",
+    "sku": "SKU: WIDA-643",
+    "price": "K 900",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ttyg1grrz",
+    "name": "HIV DETERMINE 1/2",
+    "sku": "SKU: HIV-928",
+    "price": "K 900",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_njqtaor5u",
+    "name": "HIV SD BIOLINE 1/2",
+    "sku": "SKU: HIV-727",
+    "price": "K 650",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_fq02tx1ej",
+    "name": "GONORREA CASSETES",
+    "sku": "SKU: GONO-528",
+    "price": "K 950",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_pone26eda",
+    "name": "CHLAMYDIA",
+    "sku": "SKU: CHLA-793",
+    "price": "K 950",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_9d56nu044",
+    "name": "TB IGG/IGM",
+    "sku": "SKU: TBI-517",
+    "price": "K 900",
+    "unit": "per 40",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_y3xaj7byp",
+    "name": "COVID 19 TEST",
+    "sku": "SKU: COVI-333",
+    "price": "K 800",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_1ko3yxuqv",
+    "name": "CRYPTOCOCAL ANTIGEN TEST",
+    "sku": "SKU: CRYP-641",
+    "price": "K 1400",
+    "unit": "per 50",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_36y3dbrcy",
+    "name": "RHEUMATIOD FACTOR LATEX",
+    "sku": "SKU: RHEU-218",
+    "price": "K 950",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_69v2ymkzq",
+    "name": "TB LAM",
+    "sku": "SKU: TBL-616",
+    "price": "K 800",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ten048n7e",
+    "name": "TOXOPLASMA CASSETTES",
+    "sku": "SKU: TOXO-986",
+    "price": "K 950",
+    "unit": "per 30",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_2tf1afl6w",
+    "name": "PSA CASSETTES",
+    "sku": "SKU: PSA-109",
+    "price": "K 950",
+    "unit": "per 25",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_38bw29kbm",
+    "name": "CRP LATEX",
+    "sku": "SKU: CRP-38",
+    "price": "K 780",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_z0cyonxa4",
+    "name": "URINALUSIS",
+    "sku": "SKU: URIN-848",
+    "price": "K 165",
+    "unit": "per 100",
+    "category": "Diagnostics",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ody2mnack",
+    "name": "ABX MINCLEAN 1L",
+    "sku": "SKU: ABX-411",
+    "price": "K 2600",
+    "unit": "per 1L",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_1h1q3p7gt",
+    "name": "ABX MINILYSE 1L",
+    "sku": "SKU: ABX-975",
+    "price": "K 2600",
+    "unit": "per 1L",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_6yrrcyj47",
+    "name": "ABX MINIDIL",
+    "sku": "SKU: ABX-346",
+    "price": "K 5000",
+    "unit": "per 20L",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_mnu6w2gjg",
+    "name": "CETRIFUGE TUBES            EA",
+    "sku": "SKU: CETR-322",
+    "price": "K 5",
+    "unit": "per CH",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_vnbv7drdu",
+    "name": "PIPETTE TIPS (BLUE) 100UL      100",
+    "sku": "SKU: PIPE-455",
+    "price": "K 650",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_oqxz5w1fl",
+    "name": "PIPETTE TIPS (YELLOW) 100UL     100",
+    "sku": "SKU: PIPE-638",
+    "price": "K 450",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_97bpd96hk",
+    "name": "PLAIN SWARBS             10",
+    "sku": "SKU: PLAI-232",
+    "price": "K 1200",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_0n1osc5hq",
+    "name": "SWARB WITH MEDIA              10",
+    "sku": "SKU: SWAR-228",
+    "price": "K 1500",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ahtjrg055",
+    "name": "EDTA TUBES PURPLE TOPS          10",
+    "sku": "SKU: EDTA-130",
+    "price": "K 165",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_45t6h3185",
+    "name": "PLAIN TUBES RED TOPS           10",
+    "sku": "SKU: PLAI-953",
+    "price": "K 165",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_5f02ea4kf",
+    "name": "NEEDLES 21G/23G             10",
+    "sku": "SKU: NEED-874",
+    "price": "K ",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_vzixmzti0",
+    "name": "LITHIUM HEPARIN (GREEN TOPS )                    10",
+    "sku": "SKU: LITH-704",
+    "price": "K 230",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_y7o7hyeqn",
+    "name": "BLUE TUBES              10",
+    "sku": "SKU: BLUE-364",
+    "price": "K 280",
+    "unit": "per 0",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_x1ubhai27",
+    "name": "CELL PARK BROWN              20",
+    "sku": "SKU: CELL-759",
+    "price": "K 4800",
+    "unit": "per L",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_24b2dchdv",
+    "name": "CELL PARK WHITE             20",
+    "sku": "SKU: CELL-246",
+    "price": "K 6000",
+    "unit": "per L",
+    "category": "Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ib7b46phi",
+    "name": "COVER SLIPS              10",
+    "sku": "SKU: COVE-541",
+    "price": "K 55",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_93l5i0ewz",
+    "name": "GLASS SLIDES             50",
+    "sku": "SKU: GLAS-857",
+    "price": "K 60",
+    "unit": "per ",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ehx73tbvb",
+    "name": "M.SPIRIT               2.",
+    "sku": "SKU: MSP-377",
+    "price": "K 250",
+    "unit": "per 5L",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_1wuounjsh",
+    "name": "METHANOL                2.",
+    "sku": "SKU: METH-399",
+    "price": "K 550",
+    "unit": "per 5L",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_bcr9xst27",
+    "name": "ETHANOL 99%              2.",
+    "sku": "SKU: ETHA-502",
+    "price": "K 450",
+    "unit": "per 5L",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_cs94vgonw",
+    "name": "GLOVES                 10",
+    "sku": "SKU: GLOV-912",
+    "price": "K 130",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_tosp5zyal",
+    "name": "STOOL CONTAINER             EAC",
+    "sku": "SKU: STOO-335",
+    "price": "K 5",
+    "unit": "per H",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_lrkbs3q7j",
+    "name": "URINE CONTAINER            EAC",
+    "sku": "SKU: URIN-880",
+    "price": "K 5",
+    "unit": "per H",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_4gzk75qxp",
+    "name": "ESR                  20",
+    "sku": "SKU: ESR-31",
+    "price": "K 800",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_ugmeq5620",
+    "name": "GRAY TUBES              10",
+    "sku": "SKU: GRAY-557",
+    "price": "K 250",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_4c7vlttg9",
+    "name": "YELLOW TUBES             10",
+    "sku": "SKU: YELL-606",
+    "price": "K 300",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_lr4oy55hx",
+    "name": "GROUPING SERA (ABO)           SE",
+    "sku": "SKU: GROU-420",
+    "price": "K 550",
+    "unit": "per T",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_c54fhi022",
+    "name": "URINALYSIIS             10",
+    "sku": "SKU: URIN-944",
+    "price": "K 195",
+    "unit": "per 0",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_i9n14c56a",
+    "name": "ONCALL GLUCOSE STICKS          50",
+    "sku": "SKU: ONCA-864",
+    "price": "K 245",
+    "unit": "per ",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_yfpguhscf",
+    "name": "ACCUCHECK GLUCOSE STICKS         50",
+    "sku": "SKU: ACCU-180",
+    "price": "K 335",
+    "unit": "per ",
+    "category": "Lab Consumables",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_x6kq6m0la",
+    "name": "REAGETS                           EAC",
+    "sku": "SKU: REAG-477",
+    "price": "K ",
+    "unit": "per H",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_l4q5kxkbe",
+    "name": "BLOOD AGAR",
+    "sku": "SKU: BLOO-611",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_6t8lbg2e9",
+    "name": "XLD AGAR",
+    "sku": "SKU: XLD-742",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_8ko8xodh3",
+    "name": "MACCKONKEY AGAR",
+    "sku": "SKU: MACC-350",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_fwj0g7dl6",
+    "name": "CLED AGA",
+    "sku": "SKU: CLED-273",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_b3nvhsprt",
+    "name": "MULLER HILTON",
+    "sku": "SKU: MULL-238",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_g5rpsg9aw",
+    "name": "MANNITOL SALT AGAR",
+    "sku": "SKU: MANN-534",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_htiru0up8",
+    "name": "SIM",
+    "sku": "SKU: SIM-380",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_kkkgtjuz8",
+    "name": "EREA AGAR",
+    "sku": "SKU: EREA-996",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_w8kykao8w",
+    "name": "TSI AGAR",
+    "sku": "SKU: TSI-825",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_7eb5h31za",
+    "name": "CITRATE AGAR",
+    "sku": "SKU: CITR-82",
+    "price": "K 1750",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_w86l85ofu",
+    "name": "TCB",
+    "sku": "SKU: TCB-30",
+    "price": "K 2500",
+    "unit": "per 500G",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_pf5y6v1jh",
+    "name": "GRAM STAIN",
+    "sku": "SKU: GRAM-501",
+    "price": "K 1500",
+    "unit": "per SET",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_nohemdnxk",
+    "name": "GIEMSA",
+    "sku": "SKU: GIEM-857",
+    "price": "K 650",
+    "unit": "per 1L",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_uvhktq0xz",
+    "name": "PETRI DISHES",
+    "sku": "SKU: PETR-347",
+    "price": "K 2300",
+    "unit": "per 500",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_r1ug5fcki",
+    "name": "WIRE LOOPS            E",
+    "sku": "SKU: WIRE-423",
+    "price": "K 650",
+    "unit": "per ACH",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_w5cmzmhv8",
+    "name": "BLOOD CULTURE BOTTLES       E",
+    "sku": "SKU: BLOO-597",
+    "price": "K 198",
+    "unit": "per ACH",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  },
+  {
+    "id": "p_c5pquqasu",
+    "name": "SAMPLE BAGS",
+    "sku": "SKU: SAMP-576",
+    "price": "K 350",
+    "unit": "per 100",
+    "category": "Microbiology Reagents",
+    "badge": "In Stock",
+    "image": "/uploads/reagent.png"
+  }
+]

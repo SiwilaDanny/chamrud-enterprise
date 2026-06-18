@@ -46,6 +46,14 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  const getImageUrl = (imagePath: string) => {
+    if (!imagePath) return '/uploads/reagent.png';
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+      return imagePath;
+    }
+    return `http://localhost:3001${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+  };
+
   const [postForm, setPostForm] = useState({
     title: "",
     body: "",
@@ -277,7 +285,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
                     posts.map((post) => (
                       <div key={post.id} className="flex gap-4 p-4 bg-white rounded-xl border border-border hover:border-[#149CD8]/30 transition-all shadow-sm">
                         {post.imageUrl ? (
-                          <img src={post.imageUrl} alt={post.title} className="w-16 h-16 rounded-lg object-cover flex-shrink-0" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                          <img src={getImageUrl(post.imageUrl)} alt={post.title} className="w-16 h-16 rounded-lg object-cover flex-shrink-0" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                         ) : (
                           <div className="w-16 h-16 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0"><ImageIcon className="w-5 h-5 text-muted-foreground" /></div>
                         )}
@@ -309,7 +317,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {products.map((product) => (
                       <div key={product.id} className="flex gap-4 p-4 bg-white rounded-xl border border-border shadow-sm items-center">
-                        <img src={product.image} className="w-12 h-12 rounded bg-slate-100 object-cover" />
+                        <img src={getImageUrl(product.image)} className="w-12 h-12 rounded bg-slate-100 object-cover" />
                         <div className="flex-1 min-w-0">
                           <div className="font-semibold text-sm text-foreground truncate">{product.name}</div>
                           <div className="text-xs text-muted-foreground">{product.category} · {product.sku}</div>
@@ -394,11 +402,11 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
                     </div>
                     <div>
                       <label className="text-xs font-semibold text-muted-foreground uppercase mb-1 block">Category</label>
-                      <select value={productForm.category || "Consumables"} onChange={e => setProductForm(f => ({ ...f, category: e.target.value }))} className="w-full px-3 py-2 rounded-lg border bg-white text-sm focus:border-[#003399] outline-none">
+                      <select value={productForm.category || "Diagnostics"} onChange={e => setProductForm(f => ({ ...f, category: e.target.value }))} className="w-full px-3 py-2 rounded-lg border bg-white text-sm focus:border-[#003399] outline-none">
                         <option value="Diagnostics">Diagnostics</option>
                         <option value="Reagents">Reagents</option>
-                        <option value="Consumables">Consumables</option>
-                        <option value="Equipment">Equipment</option>
+                        <option value="Lab Consumables">Lab Consumables</option>
+                        <option value="Microbiology Reagents">Microbiology Reagents</option>
                       </select>
                     </div>
                     <div>

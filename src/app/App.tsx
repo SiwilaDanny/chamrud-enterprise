@@ -96,39 +96,39 @@ const NAV_ITEMS = [
 
 const PRODUCT_CATEGORIES = [
   {
-    title: "Laboratory Consumables",
+    title: "Diagnostics",
     description:
-      "High-quality pipettes, tubes, flasks, and disposables for every lab workflow",
+      "Rapid tests, cassettes, and strips for malaria, hepatitis, HIV, syphilis, TB, COVID-19 and more",
     image:
-      "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600&h=400&fit=crop&auto=format",
-    count: "2,400+ Products",
+      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&auto=format",
+    count: "30+ Products",
     color: "from-blue-900 to-blue-700",
   },
   {
-    title: "Reagents & Chemicals",
+    title: "Reagents",
     description:
-      "Premium grade reagents, buffers, culture media, and diagnostic kits",
+      "FBC reagents including ABX Minclean, Minilyse, Minidil and other analyser consumables",
     image:
       "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop&auto=format",
-    count: "1,800+ Products",
+    count: "5+ Products",
     color: "from-cyan-900 to-cyan-700",
   },
   {
-    title: "Medical Equipment",
+    title: "Lab Consumables",
     description:
-      "Centrifuges, microscopes, spectrophotometers, and analytical instruments",
+      "Tubes, pipette tips, swabs, glass slides, cover slips, containers, gloves and other bench supplies",
     image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop&auto=format",
-    count: "650+ Products",
+      "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600&h=400&fit=crop&auto=format",
+    count: "30+ Products",
     color: "from-indigo-900 to-indigo-700",
   },
   {
-    title: "Rapid Diagnostics",
+    title: "Microbiology Reagents",
     description:
-      "Lateral flow assays, point-of-care tests, and immunoassay platforms",
+      "Culture media, gram stain, agars (blood, MacConkey, CLED, XLD), petri dishes, and wire loops",
     image:
-      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&auto=format",
-    count: "320+ Products",
+      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop&auto=format",
+    count: "15+ Products",
     color: "from-slate-800 to-slate-700",
   },
 ];
@@ -281,6 +281,14 @@ export default function App() {
     }
   }, [isAdminOpen]);
 
+  const getImageUrl = (imagePath: string) => {
+    if (!imagePath) return '/uploads/reagent.png';
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+      return imagePath;
+    }
+    return `http://localhost:3001${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+  };
+
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -393,7 +401,7 @@ export default function App() {
     setMobileOpen(false);
   };
 
-  const categories = ["All", "Consumables", "Reagents", "Equipment", "Diagnostics"];
+  const categories = ["All", ...Array.from(new Set(products.map((p) => p.category))).sort()];
   const filtered = products.filter((p) => {
     const matchesCategory = activeCategory === "All" || p.category === activeCategory;
     const matchesSearch =
@@ -700,19 +708,10 @@ export default function App() {
             <div
               key={cat.title}
               onClick={() => {
-                const categoryMap: Record<string, string> = {
-                  "Laboratory Consumables": "Consumables",
-                  "Reagents & Chemicals": "Reagents",
-                  "Medical Equipment": "Equipment",
-                  "Rapid Diagnostics": "Diagnostics"
-                };
-                const mapped = categoryMap[cat.title];
-                if (mapped) {
-                  setActiveCategory(mapped);
-                  setSearchQuery("");
-                  const el = document.getElementById("products");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }
+                setActiveCategory(cat.title);
+                setSearchQuery("");
+                const el = document.getElementById("featured");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
               className="group relative rounded-xl overflow-hidden cursor-pointer bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
@@ -754,22 +753,25 @@ export default function App() {
           <div className="flex items-end justify-between mb-6">
             <div>
               <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
-                Featured Products
+                Price List
               </div>
               <h2
                 className="text-2xl md:text-3xl font-bold text-foreground"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
-                Popular this month
+                Our Products &amp; Price List
               </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                {filtered.length} of {products.length} items — prices in Zambian Kwacha (K)
+              </p>
             </div>
-            <a
-              href="#products"
+            <button
+              onClick={() => { setActiveCategory("All"); setSearchQuery(""); }}
               className="hidden md:flex items-center gap-1.5 text-sm text-[#149CD8] font-medium hover:gap-2.5 transition-all"
             >
-              View all products
+              Show all
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
 
           {/* Category filter */}
@@ -797,7 +799,7 @@ export default function App() {
               >
                 <div className="h-44 bg-slate-100 overflow-hidden relative">
                   <img
-                    src={product.image}
+                    src={getImageUrl(product.image)}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -840,6 +842,14 @@ export default function App() {
               </div>
             ))}
           </div>
+          {filtered.length === 0 && (
+            <div className="text-center py-20 text-muted-foreground">
+              <div className="text-4xl mb-4">🔍</div>
+              <p className="font-semibold text-foreground mb-1">No products found</p>
+              <p className="text-sm">Try a different search or category filter.</p>
+              <button onClick={() => { setActiveCategory("All"); setSearchQuery(""); }} className="mt-4 text-sm text-[#149CD8] hover:underline">Clear filters</button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -909,7 +919,7 @@ export default function App() {
                 {post.imageUrl && (
                   <div className="h-48 overflow-hidden bg-slate-100 flex-shrink-0">
                     <img
-                      src={post.imageUrl}
+                      src={getImageUrl(post.imageUrl)}
                       alt={post.title}
                       className="w-full h-full object-cover"
                       onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
@@ -1338,7 +1348,7 @@ export default function App() {
               ) : (
                 cart.map(item => (
                   <div key={item.product.id} className="flex gap-3 bg-white p-3 rounded-xl border border-border shadow-sm">
-                    <img src={item.product.image} alt={item.product.name} className="w-16 h-16 object-cover rounded-lg bg-slate-100" />
+                    <img src={getImageUrl(item.product.image)} alt={item.product.name} className="w-16 h-16 object-cover rounded-lg bg-slate-100" />
                     <div className="flex-1 min-w-0">
                       <div className="text-xs text-muted-foreground truncate">{item.product.sku}</div>
                       <div className="font-semibold text-sm leading-tight line-clamp-2 mb-1">{item.product.name}</div>
