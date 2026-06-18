@@ -28,7 +28,7 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/1781779003266-659814850.jpg"
+      "image": "http://localhost:3001/uploads/1781786335190-399355254.jpg"
     },
     {
       "id": "p4",
@@ -68,7 +68,7 @@
       "unit": "per 40",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/hepatitis.png"
+      "image": "http://localhost:3001/uploads/1781786354179-138434344.webp"
     },
     {
       "id": "p_38m4acqkz",
@@ -78,7 +78,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/hepatitis.png"
+      "image": "/uploads/hepatitis.png",
+      "hidden": true
     },
     {
       "id": "p_x18m6r1jg",
@@ -88,7 +89,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/hepatitis.png"
+      "image": "/uploads/hepatitis.png",
+      "hidden": true
     },
     {
       "id": "p_2suruxe8p",
@@ -98,7 +100,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/hepatitis.png"
+      "image": "/uploads/hepatitis.png",
+      "hidden": true
     },
     {
       "id": "p6",
@@ -108,7 +111,7 @@
       "unit": "per 40",
       "category": "Diagnostics",
       "badge": "New",
-      "image": "/uploads/1781779296340-205681101.webp"
+      "image": "http://localhost:3001/uploads/1781786376797-106808945.webp"
     },
     {
       "id": "p_i2yffjs2z",
@@ -118,7 +121,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_edg5640qw",
@@ -128,7 +132,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_mghfi2gzb",
@@ -138,7 +143,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_pt9e9rqng",
@@ -148,7 +154,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p7",
@@ -168,7 +175,8 @@
       "unit": "per 100",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/typhoid.png"
+      "image": "/uploads/typhoid.png",
+      "hidden": true
     },
     {
       "id": "p_ttyg1grrz",
@@ -178,7 +186,8 @@
       "unit": "per 100",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_njqtaor5u",
@@ -188,7 +197,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_fq02tx1ej",
@@ -198,7 +208,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_pone26eda",
@@ -208,7 +219,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_9d56nu044",
@@ -218,7 +230,8 @@
       "unit": "per 40",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p8",
@@ -228,7 +241,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "CE Marked",
-      "image": "/uploads/covid.png"
+      "image": "/uploads/covid.png",
+      "hidden": true
     },
     {
       "id": "p_1ko3yxuqv",
@@ -238,7 +252,8 @@
       "unit": "per 50",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_36y3dbrcy",
@@ -248,7 +263,8 @@
       "unit": "per 100",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_69v2ymkzq",
@@ -258,7 +274,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_ten048n7e",
@@ -268,7 +285,8 @@
       "unit": "per 30",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_2tf1afl6w",
@@ -278,7 +296,8 @@
       "unit": "per 25",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_38bw29kbm",
@@ -288,7 +307,8 @@
       "unit": "per 100",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_z0cyonxa4",
@@ -298,7 +318,8 @@
       "unit": "per 100",
       "category": "Diagnostics",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p9",
@@ -308,7 +329,7 @@
       "unit": "per 1L",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/abx_package.png"
+      "image": "http://localhost:3001/uploads/1781786778852-165049058.jpeg"
     },
     {
       "id": "p10",
@@ -318,7 +339,8 @@
       "unit": "per 1L",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/abx_package.png"
+      "image": "http://localhost:3001/uploads/1781786759132-480450024.jpeg",
+      "hidden": false
     },
     {
       "id": "p_6yrrcyj47",
@@ -328,7 +350,8 @@
       "unit": "per 20L",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/abx_package.png"
+      "image": "http://localhost:3001/uploads/1781786834155-192482994.jpeg",
+      "hidden": false
     },
     {
       "id": "p_mnu6w2gjg",
@@ -338,7 +361,8 @@
       "unit": "per CH",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/tubes.png",
+      "hidden": true
     },
     {
       "id": "p_vnbv7drdu",
@@ -348,7 +372,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/pipette.png"
+      "image": "/uploads/pipette.png",
+      "hidden": false
     },
     {
       "id": "p_oqxz5w1fl",
@@ -358,7 +383,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/pipette.png"
+      "image": "/uploads/pipette.png",
+      "hidden": false
     },
     {
       "id": "p_97bpd96hk",
@@ -368,7 +394,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_0n1osc5hq",
@@ -378,7 +405,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_ahtjrg055",
@@ -388,7 +416,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_45t6h3185",
@@ -398,7 +427,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/tubes.png",
+      "hidden": true
     },
     {
       "id": "p_5f02ea4kf",
@@ -408,7 +438,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_vzixmzti0",
@@ -418,7 +449,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_y7o7hyeqn",
@@ -428,7 +460,8 @@
       "unit": "per 0",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/tubes.png",
+      "hidden": true
     },
     {
       "id": "p_x1ubhai27",
@@ -438,7 +471,8 @@
       "unit": "per L",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_24b2dchdv",
@@ -448,7 +482,8 @@
       "unit": "per L",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_ib7b46phi",
@@ -458,7 +493,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_93l5i0ewz",
@@ -468,7 +504,8 @@
       "unit": "per ",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_ehx73tbvb",
@@ -478,7 +515,8 @@
       "unit": "per 5L",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_1wuounjsh",
@@ -488,7 +526,8 @@
       "unit": "per 5L",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_bcr9xst27",
@@ -498,7 +537,8 @@
       "unit": "per 5L",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_cs94vgonw",
@@ -508,7 +548,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/gloves_box.png"
+      "image": "http://localhost:3001/uploads/1781786866122-601677120.jpeg",
+      "hidden": true
     },
     {
       "id": "p_tosp5zyal",
@@ -518,7 +559,8 @@
       "unit": "per H",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_lrkbs3q7j",
@@ -528,7 +570,8 @@
       "unit": "per H",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_4gzk75qxp",
@@ -538,7 +581,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_ugmeq5620",
@@ -548,7 +592,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/tubes.png",
+      "hidden": true
     },
     {
       "id": "p_4c7vlttg9",
@@ -558,7 +603,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png"
+      "image": "/uploads/tubes.png",
+      "hidden": true
     },
     {
       "id": "p_lr4oy55hx",
@@ -568,7 +614,8 @@
       "unit": "per T",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_c54fhi022",
@@ -578,7 +625,8 @@
       "unit": "per 0",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_i9n14c56a",
@@ -588,7 +636,8 @@
       "unit": "per ",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_yfpguhscf",
@@ -598,7 +647,8 @@
       "unit": "per ",
       "category": "Lab Consumables",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/empty_tubes.png",
+      "hidden": true
     },
     {
       "id": "p_x6kq6m0la",
@@ -608,7 +658,8 @@
       "unit": "per H",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_l4q5kxkbe",
@@ -618,7 +669,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "http://localhost:3001/uploads/1781786533418-534764611.png",
+      "hidden": false
     },
     {
       "id": "p_6t8lbg2e9",
@@ -628,7 +680,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_8ko8xodh3",
@@ -638,7 +691,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_fwj0g7dl6",
@@ -648,7 +702,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_b3nvhsprt",
@@ -658,7 +713,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_g5rpsg9aw",
@@ -668,7 +724,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_htiru0up8",
@@ -678,7 +735,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_kkkgtjuz8",
@@ -688,7 +746,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_w8kykao8w",
@@ -698,7 +757,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_7eb5h31za",
@@ -708,7 +768,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/agar_package.png",
+      "hidden": true
     },
     {
       "id": "p_w86l85ofu",
@@ -718,7 +779,8 @@
       "unit": "per 500G",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/agar_package.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_pf5y6v1jh",
@@ -728,7 +790,8 @@
       "unit": "per SET",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "http://localhost:3001/uploads/1781786896948-780205062.jpeg",
+      "hidden": true
     },
     {
       "id": "p_nohemdnxk",
@@ -738,7 +801,8 @@
       "unit": "per 1L",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p19",
@@ -748,7 +812,8 @@
       "unit": "per 500",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/1781778817142-868704564.webp"
+      "image": "/uploads/petri.png",
+      "hidden": true
     },
     {
       "id": "p_r1ug5fcki",
@@ -758,7 +823,8 @@
       "unit": "per ACH",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_w5cmzmhv8",
@@ -768,7 +834,8 @@
       "unit": "per ACH",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     },
     {
       "id": "p_c5pquqasu",
@@ -778,7 +845,8 @@
       "unit": "per 100",
       "category": "Microbiology Reagents",
       "badge": "In Stock",
-      "image": "/uploads/reagent.png"
+      "image": "/uploads/reagent.png",
+      "hidden": true
     }
   ],
   "posts": [

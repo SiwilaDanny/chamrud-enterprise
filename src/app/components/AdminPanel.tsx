@@ -164,6 +164,16 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
     showToast("Product removed.");
   }
 
+  async function toggleProductVisibility(id: string) {
+    const updated = products.map(p =>
+      p.id === id ? { ...p, hidden: !p.hidden } : p
+    );
+    setProducts(updated);
+    await saveProducts(updated);
+    const product = updated.find(p => p.id === id);
+    showToast(product?.hidden ? "Product hidden from public." : "Product is now visible.");
+  }
+
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>, type: "post" | "product") {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -316,14 +326,37 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
                 <div className="flex-1 overflow-y-auto p-6 pt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {products.map((product) => (
-                      <div key={product.id} className="flex gap-4 p-4 bg-white rounded-xl border border-border shadow-sm items-center">
-                        <img src={getImageUrl(product.image)} className="w-12 h-12 rounded bg-slate-100 object-cover" />
+                      <div key={product.id} className={`flex gap-4 p-4 bg-white rounded-xl border shadow-sm items-center transition-all ${product.hidden ? "border-amber-200 opacity-60" : "border-border"}`}>
+                        <div className="relative flex-shrink-0">
+                          <img src={getImageUrl(product.image)} className="w-12 h-12 rounded bg-slate-100 object-cover" />
+                          {product.hidden && (
+                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 rounded-full flex items-center justify-center">
+                              <EyeOff className="w-2.5 h-2.5 text-white" />
+                            </div>
+                          )}
+                        </div>
                         <div className="flex-1 min-w-0">
-                          <div className="font-semibold text-sm text-foreground truncate">{product.name}</div>
+                          <div className="flex items-center gap-2">
+                            <div className="font-semibold text-sm text-foreground truncate">{product.name}</div>
+                            {product.hidden && (
+                              <span className="text-[9px] font-bold bg-amber-100 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">Hidden</span>
+                            )}
+                          </div>
                           <div className="text-xs text-muted-foreground">{product.category} · {product.sku}</div>
                           <div className="text-sm font-bold text-[#003399] mt-1">{product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.unit}</span></div>
                         </div>
                         <div className="flex flex-col gap-2">
+                          <button
+                            onClick={() => toggleProductVisibility(product.id)}
+                            title={product.hidden ? "Make visible" : "Hide from public"}
+                            className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+                              product.hidden
+                                ? "bg-amber-100 text-amber-600 hover:bg-amber-200"
+                                : "bg-slate-100 text-muted-foreground hover:text-amber-600 hover:bg-amber-100"
+                            }`}
+                          >
+                            {product.hidden ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                          </button>
                           <button onClick={() => { setProductForm(product); setView("editProduct"); }} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-[#003399] hover:bg-[#003399]/10 flex items-center justify-center transition-colors"><Edit2 className="w-3.5 h-3.5" /></button>
                           <button onClick={() => deleteProduct(product.id)} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-red-600 hover:bg-red-100 flex items-center justify-center transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>
                         </div>

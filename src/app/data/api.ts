@@ -9,6 +9,7 @@ export interface Product {
   category: string;
   badge: string;
   image: string;
+  hidden?: boolean;
 }
 
 export async function fetchProducts(): Promise<Product[]> {

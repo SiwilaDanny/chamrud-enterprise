@@ -55,6 +55,11 @@ const NAV_ITEMS = [
     ],
   },
   {
+    label: "Reagents List",
+    href: "#reagents-list",
+    children: [],
+  },
+  {
     label: "Medical Equipment",
     href: "#products",
     children: [
@@ -263,6 +268,8 @@ export default function App() {
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [currentView, setCurrentView] = useState<"home" | "reagents-list">("home");
+  const [reagentsSearch, setReagentsSearch] = useState("");
 
   const [products, setProducts] = useState<Product[]>(FEATURED_PRODUCTS as any);
   const [cart, setCart] = useState<{product: Product, quantity: number}[]>([]);
@@ -306,21 +313,43 @@ export default function App() {
     }
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://localhost:3001/api/contact", {
+      // 1. Submit to Web3Forms
+      const web3FormsRes = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(contactForm),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "52da7e8b-2570-4bf9-8004-2f642b31819e",
+          name: contactForm.name,
+          email: contactForm.email,
+          subject: contactForm.subject || `New Inquiry from ${contactForm.name}`,
+          message: contactForm.message,
+        })
       });
-      const data = await res.json();
-      if (data.success) {
+      const web3Data = await web3FormsRes.json();
+
+      // 2. Submit to local backend to save in database
+      try {
+        await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(contactForm),
+        });
+      } catch (err) {
+        console.warn("Could not save copy to local database:", err);
+      }
+
+      if (web3Data.success) {
         setSubmitSuccess(true);
         setContactForm({ name: "", email: "", subject: "", message: "" });
         setTimeout(() => setSubmitSuccess(false), 6000);
       } else {
-        alert(data.error || "Failed to send message. Please try again.");
+        alert(web3Data.message || "Failed to send message via Web3Forms. Please try again.");
       }
     } catch {
-      alert("Could not reach the server. Please check your internet connection.");
+      alert("Failed to send message. Please check your internet connection.");
     } finally {
       setIsSubmitting(false);
     }
@@ -372,6 +401,15 @@ export default function App() {
   };
 
   const handleNavClick = (label: string, parentLabel?: string) => {
+    if (label === "Reagents List") {
+      setCurrentView("reagents-list");
+      setMobileOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    } else {
+      setCurrentView("home");
+    }
+
     if (parentLabel === "Brands" || label === "Brands") {
       if (parentLabel === "Brands") {
         setSearchQuery(label);
@@ -398,12 +436,23 @@ export default function App() {
 
   const categories = ["All", ...Array.from(new Set(products.map((p) => p.category))).sort()];
   const filtered = products.filter((p) => {
+    if (p.hidden) return false;
     const matchesCategory = activeCategory === "All" || p.category === activeCategory;
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.category.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
+  });
+
+  const filteredReagents = products.filter((p) => {
+    if (p.hidden) return false;
+    const isReagent = p.category === "Reagents" || p.category === "Microbiology Reagents";
+    if (!isReagent) return false;
+    const matchesSearch =
+      p.name.toLowerCase().includes(reagentsSearch.toLowerCase()) ||
+      p.sku.toLowerCase().includes(reagentsSearch.toLowerCase());
+    return matchesSearch;
   });
 
   return (
@@ -457,7 +506,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-6 h-16">
             {/* Logo */}
-            <a href="#home" className="flex-shrink-0 flex items-center gap-3 no-underline">
+            <a href="#home" onClick={() => setCurrentView("home")} className="flex-shrink-0 flex items-center gap-3 no-underline">
               <img src="http://localhost:3001/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
               <div>
                 <div
@@ -582,6 +631,7 @@ export default function App() {
         )}
       </header>
 
+      {currentView === "home" && <>
       {/* Hero section */}
       <section id="home" className="relative bg-[#003399] overflow-hidden">
         <div
@@ -1040,6 +1090,147 @@ export default function App() {
           </div>
         </div>
       </section>
+      </> }
+
+      {currentView === "reagents-list" &&
+        <section id="reagents-list-page" className="bg-[#f0f6fb] min-h-[60vh] py-14">
+          <div className="max-w-7xl mx-auto px-4">
+            {/* Header / Info */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+              <div>
+                <button
+                  onClick={() => {
+                    setCurrentView("home");
+                    setTimeout(() => {
+                      const el = document.getElementById("home");
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }, 50);
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs text-[#149CD8] font-semibold hover:text-[#003399] transition-colors mb-3 cursor-pointer"
+                >
+                  ← Back to Main Page
+                </button>
+                <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
+                  Quick Directory
+                </div>
+                <h1
+                  className="text-2xl md:text-3xl font-bold text-foreground"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                  Reagents &amp; Chemicals List
+                </h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Browse laboratory reagents, buffer solutions, culture media, and microbiology reagents.
+                </p>
+              </div>
+
+              {/* Search filter for reagents list view */}
+              <div className="w-full md:w-80">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    placeholder="Search reagents by name or SKU..."
+                    value={reagentsSearch}
+                    onChange={(e) => setReagentsSearch(e.target.value)}
+                    className="w-full pl-9 pr-4 py-2.5 rounded-lg border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#149CD8]/30 focus:border-[#149CD8] transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white rounded-xl border border-border overflow-hidden shadow-sm">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-border text-xs font-semibold text-[#003399] uppercase tracking-wider">
+                    <th className="p-4 w-36">SKU</th>
+                    <th className="p-4">Product Name</th>
+                    <th className="p-4 w-52">Category</th>
+                    <th className="p-4 w-36">Packaging</th>
+                    <th className="p-4 w-40 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border text-sm">
+                  {filteredReagents.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="p-10 text-center text-muted-foreground">
+                        No reagents found matching your search query.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredReagents.map((product) => (
+                      <tr key={product.id} className="hover:bg-slate-50/40 transition-colors">
+                        <td className="p-4 font-mono text-xs text-muted-foreground whitespace-nowrap">
+                          {product.sku}
+                        </td>
+                        <td className="p-4 font-semibold text-foreground">
+                          {product.name}
+                        </td>
+                        <td className="p-4">
+                          <span className={`inline-block text-[10px] font-bold border px-2.5 py-0.5 rounded-full ${
+                            product.category === "Microbiology Reagents"
+                              ? "bg-purple-50 text-purple-700 border-purple-100"
+                              : "bg-cyan-50 text-cyan-700 border-cyan-100"
+                          }`}>
+                            {product.category}
+                          </span>
+                        </td>
+                        <td className="p-4 text-xs text-muted-foreground whitespace-nowrap">
+                          {product.unit}
+                        </td>
+                        <td className="p-4 text-right">
+                          <button
+                            onClick={() => addToCart(product)}
+                            className="inline-flex items-center gap-1.5 text-xs bg-[#FF9933] text-white px-3.5 py-2 rounded-lg hover:bg-[#e88820] transition-colors font-semibold cursor-pointer"
+                          >
+                            <ShoppingCart className="w-3.5 h-3.5" />
+                            Add to Basket
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Cards-free List View */}
+            <div className="block md:hidden space-y-3">
+              {filteredReagents.length === 0 ? (
+                <div className="bg-white rounded-xl border border-border p-8 text-center text-muted-foreground text-sm">
+                  No reagents found matching your search query.
+                </div>
+              ) : (
+                filteredReagents.map((product) => (
+                  <div key={product.id} className="bg-white rounded-xl border border-border p-4 shadow-sm flex items-center justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className="text-[10px] text-muted-foreground font-mono">{product.sku}</div>
+                      <h4 className="font-semibold text-sm text-foreground leading-snug my-1">{product.name}</h4>
+                      <div className="flex flex-wrap items-center gap-2 mt-2">
+                        <span className={`text-[9px] font-bold border px-2 py-0.5 rounded-full ${
+                          product.category === "Microbiology Reagents"
+                            ? "bg-purple-50 text-purple-700 border-purple-100"
+                            : "bg-cyan-50 text-cyan-700 border-cyan-100"
+                        }`}>
+                          {product.category}
+                        </span>
+                        <span className="text-[10px] text-muted-foreground">{product.unit}</span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="bg-[#FF9933] text-white p-2.5 rounded-lg hover:bg-[#e88820] transition-colors flex-shrink-0 cursor-pointer"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+      }
 
       {/* Contact Section */}
       <section id="contact" className="bg-[#003399] py-16">
