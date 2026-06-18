@@ -455,7 +455,7 @@ export default function App() {
           <div className="flex items-center gap-6 h-16">
             {/* Logo */}
             <a href="#home" className="flex-shrink-0 flex items-center gap-3 no-underline">
-              <img src="http://localhost:3001/uploads/chamrud_logo.jpg" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
+              <img src="http://localhost:3001/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
               <div>
                 <div
                   className="text-[#003399] font-bold text-base leading-tight tracking-tight"
@@ -1152,7 +1152,7 @@ export default function App() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img src="http://localhost:3001/uploads/chamrud_logo.jpg" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
+                <img src="http://localhost:3001/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
                 <div>
                   <div
                     className="text-white font-bold text-base leading-tight"
