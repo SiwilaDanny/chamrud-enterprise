@@ -351,11 +351,6 @@ export default function App() {
 
   const handleRequestQuotation = () => {
     if (cart.length === 0) return;
-    const parsePrice = (priceStr: string) => {
-      const clean = priceStr.replace(/,/g, "").replace(/[^\d.]/g, "");
-      return parseFloat(clean) || 0;
-    };
-    const total = cart.reduce((acc, item) => acc + parsePrice(item.product.price) * item.quantity, 0);
     const getAbsoluteImageUrl = (imgUrl: string) => {
       if (!imgUrl) return "";
       if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
@@ -369,10 +364,10 @@ export default function App() {
     const itemsList = cart.map(item => {
       const imgUrl = getAbsoluteImageUrl(item.product.image);
       const imgLine = imgUrl ? `%0A  Image: ${imgUrl}` : "";
-      return `▪ ${item.product.name}%0A  SKU: ${item.product.sku}%0A  Price: ${item.product.price} ${item.product.unit}%0A  Qty: ${item.quantity}%0A  Subtotal: K ${(parsePrice(item.product.price) * item.quantity).toLocaleString()}${imgLine}`;
+      return `▪ ${item.product.name}%0A  SKU: ${item.product.sku}%0A  Unit: ${item.product.unit}%0A  Qty: ${item.quantity}${imgLine}`;
     }).join('%0A%0A');
     const message =
-      `Hello Chamrud Enterprise! 👋%0A%0AI would like to request a quotation for the following items:%0A%0A${itemsList}%0A%0A─────────────────%0A*ESTIMATED TOTAL: K ${total.toLocaleString('en-ZM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*%0A─────────────────%0A%0APlease send me a formal quotation. Thank you!`;
+      `Hello Chamrud Enterprise! 👋%0A%0AI would like to request a quotation for the following items:%0A%0A${itemsList}%0A%0APlease send me a formal quotation. Thank you!`;
     window.open(`https://wa.me/260772071404?text=${message}`, '_blank');
   };
 
@@ -753,16 +748,16 @@ export default function App() {
           <div className="flex items-end justify-between mb-6">
             <div>
               <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
-                Price List
+                Product Catalog
               </div>
               <h2
                 className="text-2xl md:text-3xl font-bold text-foreground"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
-                Our Products &amp; Price List
+                Our Products Catalog
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
-                {filtered.length} of {products.length} items — prices in Zambian Kwacha (K)
+                {filtered.length} of {products.length} items — Add items to request a quotation
               </p>
             </div>
             <button
@@ -819,10 +814,10 @@ export default function App() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div
-                        className="text-lg font-bold text-[#003399]"
+                        className="text-xs md:text-sm font-bold text-[#003399]"
                         style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
                       >
-                        {product.price}
+                        Price on Request
                       </div>
                       <div className="text-[10px] text-muted-foreground">
                         {product.unit}
@@ -1352,7 +1347,7 @@ export default function App() {
                     <div className="flex-1 min-w-0">
                       <div className="text-xs text-muted-foreground truncate">{item.product.sku}</div>
                       <div className="font-semibold text-sm leading-tight line-clamp-2 mb-1">{item.product.name}</div>
-                      <div className="text-[#003399] font-bold text-sm">{item.product.price}</div>
+                      <div className="text-[#003399] font-semibold text-xs">Price on Request</div>
                     </div>
                     <div className="flex flex-col items-center justify-between">
                       <button onClick={() => updateQuantity(item.product.id, 1)} className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center">
@@ -1369,22 +1364,6 @@ export default function App() {
             </div>
             
             <div className="p-4 border-t border-border bg-white space-y-4">
-              {cart.length > 0 && (
-                <div className="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-border">
-                  <span className="text-xs font-semibold text-[#003399] uppercase tracking-wider">Estimated Total:</span>
-                  <span className="text-lg font-bold text-[#003399]">
-                    K {(() => {
-                      const parsePrice = (priceStr: string) => {
-                        const clean = priceStr.replace(/,/g, "").replace(/[^\d.]/g, "");
-                        const parsed = parseFloat(clean);
-                        return isNaN(parsed) ? 0 : parsed;
-                      };
-                      const total = cart.reduce((acc, item) => acc + (parsePrice(item.product.price) * item.quantity), 0);
-                      return total.toLocaleString("en-ZM", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    })()}
-                  </span>
-                </div>
-              )}
               <button
                 onClick={handleRequestQuotation}
                 disabled={cart.length === 0}
