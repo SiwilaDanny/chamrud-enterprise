@@ -1,0 +1,222 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "name": "MALARIA RDT CASSETTES PF/PV",
+      "sku": "SKU: MAL-PF-PV",
+      "price": "K 650",
+      "unit": "per 40",
+      "category": "Diagnostics",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/malaria.png"
+    },
+    {
+      "id": "p2",
+      "name": "MALARIA RDT CASSETTES PF",
+      "sku": "SKU: MAL-PF",
+      "price": "K 200",
+      "unit": "per 25",
+      "category": "Diagnostics",
+      "badge": "Best Seller",
+      "image": "http://localhost:3001/uploads/malaria.png"
+    },
+    {
+      "id": "p3",
+      "name": "PREGNANT TEST (HCG) STRIPS",
+      "sku": "SKU: HCG-50",
+      "price": "K 150",
+      "unit": "per 50",
+      "category": "Diagnostics",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781779003266-659814850.jpg"
+    },
+    {
+      "id": "p4",
+      "name": "RAPID PLASMA REAGIN (RPR)",
+      "sku": "SKU: RPR-100",
+      "price": "K 1300",
+      "unit": "per 100",
+      "category": "Diagnostics",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781779062615-854119795.jpg"
+    },
+    {
+      "id": "p5",
+      "name": "SYPHILIS TEST STRIPS",
+      "sku": "SKU: SYP-50",
+      "price": "K 250",
+      "unit": "per 50",
+      "category": "Diagnostics",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/syphilis.png"
+    },
+    {
+      "id": "p6",
+      "name": "HEPATITIS PROFILE (A,B,C) CASSETTES",
+      "sku": "SKU: HEP-ABC",
+      "price": "K 2500",
+      "unit": "per 40",
+      "category": "Diagnostics",
+      "badge": "New",
+      "image": "http://localhost:3001/uploads/1781779296340-205681101.webp"
+    },
+    {
+      "id": "p7",
+      "name": "TYPHOID IgG/IgM CASSETTES",
+      "sku": "SKU: TYP-40",
+      "price": "K 900",
+      "unit": "per 40",
+      "category": "Diagnostics",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/typhoid.png"
+    },
+    {
+      "id": "p8",
+      "name": "COVID 19 TEST",
+      "sku": "SKU: COV-25",
+      "price": "K 800",
+      "unit": "per 25",
+      "category": "Diagnostics",
+      "badge": "CE Marked",
+      "image": "http://localhost:3001/uploads/covid.png"
+    },
+    {
+      "id": "p9",
+      "name": "ABX MINCLEAN 1L",
+      "sku": "SKU: ABX-MC",
+      "price": "K 2600",
+      "unit": "per 1L",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/abx_package.png"
+    },
+    {
+      "id": "p10",
+      "name": "ABX MINILYSE 1L",
+      "sku": "SKU: ABX-ML",
+      "price": "K 2600",
+      "unit": "per 1L",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/abx_package.png"
+    },
+    {
+      "id": "p11",
+      "name": "ABX MINIDIL 20L",
+      "sku": "SKU: ABX-MD",
+      "price": "K 5000",
+      "unit": "per 20L",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/abx_package.png"
+    },
+    {
+      "id": "p12",
+      "name": "PIPETTE TIPS (BLUE) 1000UL",
+      "sku": "SKU: TIP-B",
+      "price": "K 650",
+      "unit": "per 1000",
+      "category": "Consumables",
+      "badge": "Best Seller",
+      "image": "http://localhost:3001/uploads/pipette.png"
+    },
+    {
+      "id": "p13",
+      "name": "PIPETTE TIPS (YELLOW) 200UL",
+      "sku": "SKU: TIP-Y",
+      "price": "K 450",
+      "unit": "per 1000",
+      "category": "Consumables",
+      "badge": "Best Seller",
+      "image": "http://localhost:3001/uploads/pipette.png"
+    },
+    {
+      "id": "p14",
+      "name": "EDTA TUBES PURPLE TOPS",
+      "sku": "SKU: TUBE-P",
+      "price": "K 165",
+      "unit": "per 100",
+      "category": "Consumables",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/empty_tubes.png"
+    },
+    {
+      "id": "p15",
+      "name": "PLAIN TUBES RED TOPS",
+      "sku": "SKU: TUBE-R",
+      "price": "K 165",
+      "unit": "per 100",
+      "category": "Consumables",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/empty_tubes.png"
+    },
+    {
+      "id": "p16",
+      "name": "GLOVES",
+      "sku": "SKU: GLV-100",
+      "price": "K 130",
+      "unit": "per 100",
+      "category": "Consumables",
+      "badge": "Best Seller",
+      "image": "http://localhost:3001/uploads/1781778710624-209217470.jpeg"
+    },
+    {
+      "id": "p17",
+      "name": "BLOOD AGAR 500G",
+      "sku": "SKU: AGAR-BL",
+      "price": "K 1750",
+      "unit": "per 500G",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781779215272-993863560.png"
+    },
+    {
+      "id": "p18",
+      "name": "MACCONKEY AGAR 500G",
+      "sku": "SKU: AGAR-MC",
+      "price": "K 1750",
+      "unit": "per 500G",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781779133888-918906879.webp"
+    },
+    {
+      "id": "p19",
+      "name": "PETRI DISHES",
+      "sku": "SKU: PD-500",
+      "price": "K 2300",
+      "unit": "per 500",
+      "category": "Consumables",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781778817142-868704564.webp"
+    },
+    {
+      "id": "p20",
+      "name": "GIEMSA STAIN 1L",
+      "sku": "SKU: GIE-1L",
+      "price": "K 650",
+      "unit": "per 1L",
+      "category": "Reagents",
+      "badge": "In Stock",
+      "image": "http://localhost:3001/uploads/1781778911028-339864580.jpeg"
+    }
+  ],
+  "posts": [
+    {
+      "id": "post1",
+      "title": "Chamrud Enterprise Achieves ISO 9001:2015 Certification",
+      "body": "We are proud to announce that Chamrud Enterprise has officially achieved ISO 9001:2015 certification. This milestone reflects our commitment to maintaining the highest quality standards in supplying medical and laboratory equipment across Zambia.",
+      "imageUrl": "http://localhost:3001/uploads/logo.png",
+      "category": "Announcement",
+      "createdAt": "2026-06-18T10:00:00.000Z"
+    },
+    {
+      "id": "post2",
+      "title": "Special Bulk Offer on SD Bioline Malaria RDT Kits",
+      "body": "For the month of June, enjoy a 10% discount on all bulk orders of SD Bioline Malaria RDT kits. Contact our sales department to receive your custom quotation.",
+      "imageUrl": "http://localhost:3001/uploads/malaria.png",
+      "category": "Offer",
+      "createdAt": "2026-06-18T11:00:00.000Z"
+    }
+  ]
+}
