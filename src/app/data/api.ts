@@ -1,4 +1,26 @@
-const API_URL = "http://localhost:3001/api";
+import catalogData from "../../../db.json";
+
+const API_BASE_URL = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const API_URL = `${API_BASE_URL}/api`;
+
+export function getImageUrl(imagePath: string) {
+  if (!imagePath) return "/uploads/reagent.png";
+
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    try {
+      const url = new URL(imagePath);
+      if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
+        return url.pathname;
+      }
+    } catch {
+      return imagePath;
+    }
+
+    return imagePath;
+  }
+
+  return imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+}
 
 export interface Product {
   id: string;
@@ -16,6 +38,16 @@ export interface Product {
   sourceCategory?: string;
 }
 
+const STATIC_CATALOG = catalogData as { products?: Product[]; posts?: Post[] };
+
+export function getStaticProducts() {
+  return STATIC_CATALOG.products || [];
+}
+
+export function getStaticPosts() {
+  return STATIC_CATALOG.posts || [];
+}
+
 export async function fetchProducts(): Promise<Product[]> {
   try {
     const res = await fetch(`${API_URL}/products`);
@@ -23,7 +55,7 @@ export async function fetchProducts(): Promise<Product[]> {
     return await res.json();
   } catch (error) {
     console.error("Error fetching products:", error);
-    return [];
+    return getStaticProducts();
   }
 }
 
@@ -74,7 +106,7 @@ export async function fetchPosts(): Promise<Post[]> {
     return await res.json();
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return [];
+    return getStaticPosts();
   }
 }
 

@@ -16,7 +16,7 @@ import {
   Edit2,
   Upload
 } from "lucide-react";
-import { fetchPosts, savePosts, fetchProducts, saveProducts, uploadImage, Post, Product } from "../data/api";
+import { fetchPosts, savePosts, fetchProducts, saveProducts, uploadImage, getImageUrl, Post, Product } from "../data/api";
 
 const ADMIN_PASSWORD = "chamrud2024";
 const AUTH_KEY = "chamrud_admin_auth";
@@ -47,14 +47,6 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
   const [view, setView] = useState<"list" | "newPost" | "newProduct" | "editProduct">("list");
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '/uploads/reagent.png';
-    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-      return imagePath;
-    }
-    return `${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
-  };
 
   const [postForm, setPostForm] = useState({
     title: "",

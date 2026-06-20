@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProducts, fetchPosts, Product, Post } from "./data/api";
+import { fetchProducts, fetchPosts, getImageUrl, getStaticPosts, getStaticProducts, Product, Post } from "./data/api";
 import AdminPanel from "./components/AdminPanel";
 import {
   Phone,
@@ -253,61 +253,6 @@ const CATALOG_DEPARTMENTS = [
   },
 ];
 
-const FEATURED_PRODUCTS = [
-  {
-    id: "fallback-rl-bottles",
-    name: "5ml Amber Glass Bottles Black Aluminium Cap",
-    sku: "SKU: P-5ABBC",
-    price: "",
-    unit: "Quote only",
-    badge: "Rapid Labs",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/5mm-5-300x300.png",
-    category: "Lab Consumables",
-    source: "Rapid Labs",
-    sourceCategory: "Aluminium Caps",
-  },
-  {
-    id: "fallback-rl-psa",
-    name: "PSA Test - whole blood/serum/plasma",
-    sku: "SKU: D-PSA",
-    price: "",
-    unit: "Quote only",
-    badge: "Rapid Labs",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/Rapid-Test-Device-box-42-300x300.jpg",
-    category: "Diagnostics",
-    source: "Rapid Labs",
-    sourceCategory: "Cancer Markers Rapid Strips & Devices",
-  },
-  {
-    id: "fallback-rl-reagent",
-    name: "Anti-B Monoclonal Blood Grouping Reagent",
-    sku: "SKU: BG-B10",
-    price: "",
-    unit: "Quote only",
-    badge: "Rapid Labs",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/Blood-Grouping-BG-B10-Anti-B-rotated-e1703074832244-300x300.jpg",
-    category: "Diagnostics",
-    source: "Rapid Labs",
-    sourceCategory: "Blood Grouping Reagents",
-  },
-  {
-    id: "fallback-rl-reader",
-    name: "Urine Analyzer",
-    sku: "RL-ANALYZER",
-    price: "",
-    unit: "Quote only",
-    badge: "Rapid Labs",
-    image:
-      "/uploads/reagent.png",
-    category: "Equipment",
-    source: "Rapid Labs",
-    sourceCategory: "Readers",
-  },
-];
-
 const WHY_CHOOSE = [
   {
     icon: Shield,
@@ -382,12 +327,12 @@ export default function App() {
   const [sortBy, setSortBy] = useState<"name-asc" | "name-desc" | "sku-asc">("name-asc");
   const itemsPerPage = 24;
 
-  const [products, setProducts] = useState<Product[]>(FEATURED_PRODUCTS as any);
+  const [products, setProducts] = useState<Product[]>(() => getStaticProducts());
   const [cart, setCart] = useState<{product: Product, quantity: number}[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<Post[]>(() => getStaticPosts());
 
   useEffect(() => {
     if (!isAdminOpen) {
@@ -399,14 +344,6 @@ export default function App() {
       });
     }
   }, [isAdminOpen]);
-
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '/uploads/reagent.png';
-    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-      return imagePath;
-    }
-    return `${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
-  };
 
   const [contactForm, setContactForm] = useState({
     name: "",
@@ -493,11 +430,12 @@ export default function App() {
   const handleRequestQuotation = () => {
     if (cart.length === 0) return;
     const getAbsoluteImageUrl = (imgUrl: string) => {
-      if (!imgUrl) return "";
-      if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
-        return imgUrl;
+      const normalized = getImageUrl(imgUrl);
+      if (!normalized) return "";
+      if (normalized.startsWith("http://") || normalized.startsWith("https://")) {
+        return normalized;
       }
-      return `${window.location.origin}${imgUrl.startsWith("/") ? "" : "/"}${imgUrl}`;
+      return `${window.location.origin}${normalized.startsWith("/") ? "" : "/"}${normalized}`;
     };
     const itemsList = cart.map(item => {
       const imgUrl = getAbsoluteImageUrl(item.product.image);
@@ -653,7 +591,7 @@ export default function App() {
       return {
         title: "Microbiology Reagents",
         description: "Culture media, agar plates, dehydrated media, and diagnostic reagents for microbiological analysis.",
-        image: "http://localhost:3001/uploads/agar_package.png",
+        image: "/uploads/agar_package.png",
         count: "Microbiology",
         color: "from-purple-950 to-purple-800",
         category: "Microbiology Reagents",

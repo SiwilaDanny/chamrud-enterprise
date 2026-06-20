@@ -27557,7 +27557,7 @@
       "id": "post1",
       "title": "Chamrud Enterprise Achieves ISO 9001:2015 Certification",
       "body": "We are proud to announce that Chamrud Enterprise has officially achieved ISO 9001:2015 certification. This milestone reflects our commitment to maintaining the highest quality standards in supplying medical and laboratory equipment across Zambia.",
-      "imageUrl": "http://localhost:3001/uploads/logo.png",
+      "imageUrl": "/uploads/logo.png",
       "category": "Announcement",
       "createdAt": "2026-06-18T10:00:00.000Z"
     },
@@ -27565,7 +27565,7 @@
       "id": "post2",
       "title": "Special Bulk Offer on SD Bioline Malaria RDT Kits",
       "body": "For the month of June, enjoy a 10% discount on all bulk orders of SD Bioline Malaria RDT kits. Contact our sales department to receive your custom quotation.",
-      "imageUrl": "http://localhost:3001/uploads/malaria.png",
+      "imageUrl": "/uploads/malaria.png",
       "category": "Offer",
       "createdAt": "2026-06-18T11:00:00.000Z"
     }
