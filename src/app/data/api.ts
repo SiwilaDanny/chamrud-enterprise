@@ -10,6 +10,10 @@ export interface Product {
   badge: string;
   image: string;
   hidden?: boolean;
+  description?: string;
+  source?: string;
+  sourceUrl?: string;
+  sourceCategory?: string;
 }
 
 export async function fetchProducts(): Promise<Product[]> {

@@ -42,6 +42,8 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
   const [activeTab, setActiveTab] = useState<"posts" | "products">("posts");
   const [posts, setPosts] = useState<Post[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
+  const [productSearch, setProductSearch] = useState("");
+  const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
   const [view, setView] = useState<"list" | "newPost" | "newProduct" | "editProduct">("list");
   const [toast, setToast] = useState<{ msg: string; ok: boolean } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -51,7 +53,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       return imagePath;
     }
-    return `http://localhost:3001${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+    return `${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
   };
 
   const [postForm, setPostForm] = useState({
@@ -128,8 +130,8 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
 
   // --- PRODUCTS ---
   async function saveProduct() {
-    if (!productForm.name?.trim() || !productForm.price?.trim()) {
-      showToast("Name and Price are required.", false);
+    if (!productForm.name?.trim()) {
+      showToast("Product name is required.", false);
       return;
     }
     
@@ -191,6 +193,27 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
       showToast("Image uploaded successfully!");
     } else {
       showToast("Failed to upload image.", false);
+    }
+  }
+
+  async function handleBulkImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    setIsUploading(true);
+    const url = await uploadImage(file);
+    setIsUploading(false);
+    
+    if (url) {
+      const updated = products.map(p => 
+        selectedProductIds.includes(p.id) ? { ...p, image: url } : p
+      );
+      setProducts(updated);
+      await saveProducts(updated);
+      setSelectedProductIds([]);
+      showToast(`Successfully updated image for ${selectedProductIds.length} products!`);
+    } else {
+      showToast("Failed to upload bulk image.", false);
     }
   }
 
@@ -265,13 +288,13 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
             {view === "list" && (
               <div className="flex border-b border-border bg-slate-50 px-6 pt-4 gap-4">
                 <button
-                  onClick={() => setActiveTab("posts")}
+                  onClick={() => { setActiveTab("posts"); setSelectedProductIds([]); }}
                   className={`pb-3 text-sm font-semibold border-b-2 transition-all ${activeTab === "posts" ? "border-[#003399] text-[#003399]" : "border-transparent text-muted-foreground hover:text-foreground"}`}
                 >
                   Manage Posts
                 </button>
                 <button
-                  onClick={() => setActiveTab("products")}
+                  onClick={() => { setActiveTab("products"); setSelectedProductIds([]); }}
                   className={`pb-3 text-sm font-semibold border-b-2 transition-all ${activeTab === "products" ? "border-[#003399] text-[#003399]" : "border-transparent text-muted-foreground hover:text-foreground"}`}
                 >
                   Manage Products
@@ -315,57 +338,141 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
               </div>
             )}
 
-            {view === "list" && activeTab === "products" && (
-              <div className="flex-1 flex flex-col overflow-hidden">
-                <div className="px-6 py-4 flex items-center justify-between flex-shrink-0">
-                  <div className="text-xs text-muted-foreground">{products.length} product{products.length !== 1 ? "s" : ""}</div>
-                  <button onClick={() => { setProductForm({}); setView("newProduct"); }} className="flex items-center gap-2 bg-[#FF9933] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#e88820] transition-colors">
-                    <Plus className="w-4 h-4" /> New Product
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto p-6 pt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {products.map((product) => (
-                      <div key={product.id} className={`flex gap-4 p-4 bg-white rounded-xl border shadow-sm items-center transition-all ${product.hidden ? "border-amber-200 opacity-60" : "border-border"}`}>
-                        <div className="relative flex-shrink-0">
-                          <img src={getImageUrl(product.image)} className="w-12 h-12 rounded bg-slate-100 object-cover" />
-                          {product.hidden && (
-                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 rounded-full flex items-center justify-center">
-                              <EyeOff className="w-2.5 h-2.5 text-white" />
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2">
-                            <div className="font-semibold text-sm text-foreground truncate">{product.name}</div>
-                            {product.hidden && (
-                              <span className="text-[9px] font-bold bg-amber-100 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">Hidden</span>
-                            )}
-                          </div>
-                          <div className="text-xs text-muted-foreground">{product.category} · {product.sku}</div>
-                          <div className="text-sm font-bold text-[#003399] mt-1">{product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.unit}</span></div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <button
-                            onClick={() => toggleProductVisibility(product.id)}
-                            title={product.hidden ? "Make visible" : "Hide from public"}
-                            className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
-                              product.hidden
-                                ? "bg-amber-100 text-amber-600 hover:bg-amber-200"
-                                : "bg-slate-100 text-muted-foreground hover:text-amber-600 hover:bg-amber-100"
-                            }`}
-                          >
-                            {product.hidden ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                          </button>
-                          <button onClick={() => { setProductForm(product); setView("editProduct"); }} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-[#003399] hover:bg-[#003399]/10 flex items-center justify-center transition-colors"><Edit2 className="w-3.5 h-3.5" /></button>
-                          <button onClick={() => deleteProduct(product.id)} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-red-600 hover:bg-red-100 flex items-center justify-center transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>
-                        </div>
-                      </div>
-                    ))}
+            {view === "list" && activeTab === "products" && (() => {
+              const filtered = products.filter((p) => {
+                const q = productSearch.toLowerCase();
+                return (
+                  p.name.toLowerCase().includes(q) ||
+                  (p.sku && p.sku.toLowerCase().includes(q)) ||
+                  (p.category && p.category.toLowerCase().includes(q))
+                );
+              });
+              return (
+                <div className="flex-1 flex flex-col overflow-hidden">
+                  <div className="px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 flex-shrink-0 border-b border-border bg-slate-50/50">
+                    <div className="flex items-center gap-3 flex-1">
+                      <input
+                        type="checkbox"
+                        checked={filtered.length > 0 && filtered.every(p => selectedProductIds.includes(p.id))}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            const toAdd = filtered.map(p => p.id);
+                            setSelectedProductIds(prev => Array.from(new Set([...prev, ...toAdd])));
+                          } else {
+                            const toRemove = filtered.map(p => p.id);
+                            setSelectedProductIds(prev => prev.filter(id => !toRemove.includes(id)));
+                          }
+                        }}
+                        className="w-4 h-4 rounded text-[#003399] border-gray-300 focus:ring-[#003399] cursor-pointer"
+                        title="Select All Filtered"
+                      />
+                      <div className="text-xs text-muted-foreground font-semibold whitespace-nowrap">{filtered.length} of {products.length} product{products.length !== 1 ? "s" : ""}</div>
+                      <input
+                        type="text"
+                        placeholder="Search by name, SKU, or category..."
+                        value={productSearch}
+                        onChange={(e) => setProductSearch(e.target.value)}
+                        className="w-full max-w-xs px-3 py-1.5 rounded-lg border border-border bg-white text-xs focus:outline-none focus:border-[#003399] transition-all"
+                      />
+                    </div>
+                    <button onClick={() => { setProductForm({}); setView("newProduct"); }} className="flex items-center gap-2 bg-[#FF9933] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#e88820] transition-colors self-end sm:self-auto">
+                      <Plus className="w-4 h-4" /> New Product
+                    </button>
                   </div>
+                  <div className="flex-1 overflow-y-auto p-6 pt-3">
+                    {filtered.length === 0 ? (
+                      <div className="text-center py-16 text-muted-foreground">
+                        <Package className="w-10 h-10 mx-auto mb-3 opacity-30" />
+                        <p className="text-sm">No products found matching "{productSearch}"</p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {filtered.map((product) => {
+                          const isSelected = selectedProductIds.includes(product.id);
+                          return (
+                            <div key={product.id} className={`flex gap-3 p-4 bg-white rounded-xl border shadow-sm items-center transition-all ${product.hidden ? "border-amber-200 opacity-60" : "border-border"} ${isSelected ? "border-[#003399] ring-2 ring-[#003399]/15" : ""}`}>
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setSelectedProductIds([...selectedProductIds, product.id]);
+                                  } else {
+                                    setSelectedProductIds(selectedProductIds.filter(id => id !== product.id));
+                                  }
+                                }}
+                                className="w-4 h-4 rounded text-[#003399] border-gray-300 focus:ring-[#003399] cursor-pointer flex-shrink-0"
+                              />
+                              <div className="relative flex-shrink-0">
+                                <img src={getImageUrl(product.image)} className="w-12 h-12 rounded bg-slate-100 object-cover" />
+                                {product.hidden && (
+                                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 rounded-full flex items-center justify-center">
+                                    <EyeOff className="w-2.5 h-2.5 text-white" />
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <div className="font-semibold text-sm text-foreground truncate">{product.name}</div>
+                                  {product.hidden && (
+                                    <span className="text-[9px] font-bold bg-amber-100 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded-full whitespace-nowrap">Hidden</span>
+                                  )}
+                                </div>
+                                <div className="text-xs text-muted-foreground">{product.category} · {product.sku}</div>
+                                <div className="text-sm font-bold text-[#003399] mt-1">{product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.unit}</span></div>
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <button
+                                  onClick={() => toggleProductVisibility(product.id)}
+                                  title={product.hidden ? "Make visible" : "Hide from public"}
+                                  className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+                                    product.hidden
+                                      ? "bg-amber-100 text-amber-600 hover:bg-amber-200"
+                                      : "bg-slate-100 text-muted-foreground hover:text-amber-600 hover:bg-amber-100"
+                                  }`}
+                                >
+                                  {product.hidden ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                                </button>
+                                <button onClick={() => { setProductForm(product); setView("editProduct"); }} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-[#003399] hover:bg-[#003399]/10 flex items-center justify-center transition-colors"><Edit2 className="w-3.5 h-3.5" /></button>
+                                <button onClick={() => deleteProduct(product.id)} className="w-7 h-7 rounded-lg bg-slate-100 text-muted-foreground hover:text-red-600 hover:bg-red-100 flex items-center justify-center transition-colors"><Trash2 className="w-3.5 h-3.5" /></button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                  {/* Bulk Actions Banner */}
+                  {selectedProductIds.length > 0 && (
+                    <div className="bg-[#003399] text-white px-6 py-3 flex items-center justify-between flex-shrink-0 border-t border-border shadow-2xl">
+                      <div className="text-xs font-semibold">
+                        {selectedProductIds.length} product{selectedProductIds.length !== 1 ? "s" : ""} selected
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <label className={`cursor-pointer bg-[#FF9933] hover:bg-[#e88820] text-white px-4 py-2 rounded-xl text-xs font-semibold transition-colors flex items-center gap-2 ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}>
+                          <Upload className="w-3.5 h-3.5" />
+                          {isUploading ? "Uploading..." : "Upload Image to Selected"}
+                          {!isUploading && (
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleBulkImageUpload}
+                              className="hidden"
+                            />
+                          )}
+                        </label>
+                        <button
+                          onClick={() => setSelectedProductIds([])}
+                          className="text-white/80 hover:text-white text-xs font-semibold"
+                        >
+                          Deselect All
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* New Post View */}
             {view === "newPost" && (
