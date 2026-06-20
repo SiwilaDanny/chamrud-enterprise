@@ -11,12 +11,25 @@ const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 let updatedCount = 0;
 
 db.products = db.products.map(product => {
+  // Do not normalize images that are already specific Rapid Labs downloads or custom assets
+  if (product.image && (product.image.includes('rapidlabs_') || product.image.includes('coverslips.jpg') || product.image.includes('glass_slides.jpg'))) {
+    return product;
+  }
+
   const name = product.name.toUpperCase();
   const category = product.category;
   let newImage = product.image;
 
   // Let's check keywords to assign the most accurate image
-  if (name.includes('MALARIA')) {
+  if (name.includes('SPIRIT') || name.includes('METHANOL') || name.includes('ETHANOL')) {
+    newImage = '/uploads/reagent.png';
+  } else if (name.includes('EDTA')) {
+    newImage = '/uploads/empty_tubes.png';
+  } else if (name.includes('SLIP') || name.includes('COVERSLIP')) {
+    newImage = '/uploads/coverslips.jpg';
+  } else if (name.includes('SLIDE')) {
+    newImage = '/uploads/glass_slides.jpg';
+  } else if (name.includes('MALARIA')) {
     newImage = '/uploads/malaria.png';
   } else if (name.includes('PREGNAN') || name.includes('HCG')) {
     newImage = '/uploads/pregnancy.png';

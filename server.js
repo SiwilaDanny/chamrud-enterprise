@@ -75,7 +75,7 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  const imageUrl = `http://localhost:3001/uploads/${req.file.filename}`;
+  const imageUrl = `/uploads/${req.file.filename}`;
   res.json({ url: imageUrl });
 });
 
@@ -163,6 +163,9 @@ app.post('/api/contact', async (req, res) => {
 });
 
 const PORT = 3001;
-app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });
+server.ref();
+const keepAlive = setInterval(() => {}, 1 << 30);
+server.on('close', () => clearInterval(keepAlive));

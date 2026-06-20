@@ -10,6 +10,7 @@ import {
   Search,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   Menu,
   X,
   FlaskConical,
@@ -31,173 +32,279 @@ import {
 
 const NAV_ITEMS = [
   {
-    label: "Lab Consumables",
+    label: "Diagnostic Products",
     href: "#products",
+    category: "Diagnostics",
     children: [
-      { label: "Pipettes & Tips", href: "#products" },
-      { label: "Microtubes & Centrifuge Tubes", href: "#products" },
-      { label: "Cell Culture Flasks", href: "#products" },
-      { label: "Petri Dishes & Plates", href: "#products" },
-      { label: "Glassware", href: "#products" },
-      { label: "Filters & Membranes", href: "#products" },
+      { label: "Rapid Tests & Devices", href: "#products", search: "Rapid Tests" },
+      { label: "Blood Grouping Reagents", href: "#products", search: "Blood Grouping Reagents" },
+      { label: "Infectious Disease Tests", href: "#products", search: "Infectious Diseases" },
+      { label: "Drugs of Abuse Tests", href: "#products", search: "Drugs of Abuse" },
+      { label: "Urinalysis Strips", href: "#products", search: "Urinalysis Strips" },
+      { label: "COVID & Respiratory", href: "#products", search: "Respiratory" },
     ],
   },
   {
-    label: "Reagents & Chemicals",
+    label: "Vials & Bottles",
     href: "#products",
+    category: "Lab Consumables",
     children: [
-      { label: "Molecular Biology Reagents", href: "#products" },
-      { label: "Biochemistry Reagents", href: "#products" },
-      { label: "Stains & Dyes", href: "#products" },
-      { label: "Buffers & Solutions", href: "#products" },
-      { label: "Culture Media", href: "#products" },
-      { label: "Diagnostic Kits", href: "#products" },
+      { label: "5ml Bottles", href: "#products", search: "5ml Bottles" },
+      { label: "10ml Bottles", href: "#products", search: "10ml Bottles" },
+      { label: "20ml Bottles", href: "#products", search: "20ml Bottles" },
+      { label: "30ml Bottles", href: "#products", search: "30ml Bottles" },
+      { label: "50ml Bottles", href: "#products", search: "50ml Bottles" },
+      { label: "100ml Bottles", href: "#products", search: "100ml Bottles" },
     ],
   },
   {
-    label: "Reagents List",
-    href: "#reagents-list",
-    children: [],
-  },
-  {
-    label: "Medical Equipment",
+    label: "Caps & Closures",
     href: "#products",
+    category: "Lab Consumables",
     children: [
-      { label: "Centrifuges", href: "#products" },
-      { label: "Microscopes", href: "#products" },
-      { label: "Spectrophotometers", href: "#products" },
-      { label: "Incubators", href: "#products" },
-      { label: "Biosafety Cabinets", href: "#products" },
-      { label: "PCR Instruments", href: "#products" },
+      { label: "Aluminium Caps", href: "#products", search: "Aluminium Caps" },
+      { label: "Atomisers & Spray Caps", href: "#products", search: "Atomisers" },
+      { label: "Dropper Pipette Assemblies", href: "#products", search: "Dropper Pipette" },
+      { label: "Bamboo Range", href: "#products", search: "Bamboo" },
+      { label: "Pots & Jars", href: "#products", search: "Jar" },
+      { label: "Special Offers", href: "#products", search: "Special Offers" },
     ],
   },
   {
-    label: "Rapid Diagnostics",
+    label: "Readers & Equipment",
     href: "#products",
+    category: "Equipment",
     children: [
-      { label: "Lateral Flow Tests", href: "#products" },
-      { label: "Point-of-Care Testing", href: "#products" },
-      { label: "Immunoassay Kits", href: "#products" },
-      { label: "Haematology Strips", href: "#products" },
-      { label: "Urinalysis", href: "#products" },
-      { label: "COVID & Respiratory", href: "#products" },
+      { label: "Readers", href: "#products", search: "Reader" },
+      { label: "Fluorescence Analyzers", href: "#products", search: "Fluorescence" },
+      { label: "Biochemical Meters", href: "#products", search: "Biochemical Meters" },
+      { label: "PCR", href: "#products", search: "PCR" },
     ],
   },
   {
-    label: "Brands",
-    href: "#brands",
+    label: "Reagents",
+    href: "#products",
+    category: "Reagents",
     children: [
-      { label: "Thermo Fisher Scientific", href: "#brands" },
-      { label: "Bio-Rad", href: "#brands" },
-      { label: "Merck", href: "#brands" },
-      { label: "Sartorius", href: "#brands" },
-      { label: "Eppendorf", href: "#brands" },
-      { label: "Qiagen", href: "#brands" },
+      { label: "Blood Grouping Reagents", href: "#products", category: "Diagnostics", search: "Blood Grouping Reagents" },
+      { label: "Latex Agglutination", href: "#products", category: "Diagnostics", search: "Latex Agglutination" },
+      { label: "Febrile Antigens", href: "#products", category: "Diagnostics", search: "Febrile Antigens" },
+      { label: "Control Materials", href: "#products", category: "All", search: "Controls" },
+      { label: "Microbiology Reagents", href: "#products", search: "Microbiology" },
     ],
   },
+  {
+    label: "Hematology & Chemistry",
+    href: "#products",
+    category: "Hematology",
+    children: [
+      { label: "ABX Hematology Reagents", href: "#products", category: "Hematology", search: "ABX" },
+      { label: "ABX Minclean", href: "#products", category: "Hematology", search: "Minclean" },
+      { label: "ABX Minilyse", href: "#products", category: "Hematology", search: "Minilyse" },
+      { label: "ABX Minidil", href: "#products", category: "Hematology", search: "Minidil" },
+      { label: "ABX C200 Chemistry Reagents", href: "#products", category: "Reagents", search: "ABX C200" },
+    ],
+  },
+  { label: "Brands", href: "#brands", children: [] },
   { label: "About Us", href: "#about", children: [] },
   { label: "Contact", href: "#contact", children: [] },
 ];
 
 const PRODUCT_CATEGORIES = [
   {
-    title: "Diagnostics",
+    title: "Diagnostic Products",
     description:
-      "Rapid tests, cassettes, and strips for malaria, hepatitis, HIV, syphilis, TB, COVID-19 and more",
+      "Blood grouping, serology, rapid tests, urinalysis, infectious disease, DOA and point-of-care diagnostics",
     image:
-      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop&auto=format",
-    count: "30+ Products",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/Rapid-Test-Device-box-42-300x300.jpg",
+    count: "800+ Products",
     color: "from-blue-900 to-blue-700",
+    category: "Diagnostics",
+    search: "",
   },
   {
-    title: "Reagents",
+    title: "Glass & Plastic Vials",
     description:
-      "FBC reagents including ABX Minclean, Minilyse, Minidil and other analyser consumables",
+      "Amber, blue, clear, green and matte glass bottles, Boston bottles, jars, vials and containers",
     image:
-      "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&h=400&fit=crop&auto=format",
-    count: "5+ Products",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/30ml-moulded-blue-bottle-with-30ml-tamper-evident-dropper-assembly-scaled-300x300.jpg",
+    count: "900+ Products",
     color: "from-cyan-900 to-cyan-700",
+    category: "Lab Consumables",
+    search: "Bottles",
   },
   {
-    title: "Lab Consumables",
+    title: "Caps, Closures & Pipettes",
     description:
-      "Tubes, pipette tips, swabs, glass slides, cover slips, containers, gloves and other bench supplies",
+      "Aluminium caps, atomisers, spray caps, dropper pipette assemblies and closure systems",
     image:
-      "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=600&h=400&fit=crop&auto=format",
-    count: "30+ Products",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/Cap-18mm-all-colours-group-no-bg-1-300x300.jpg",
+    count: "300+ Products",
     color: "from-indigo-900 to-indigo-700",
+    category: "Lab Consumables",
+    search: "Caps",
   },
   {
-    title: "Microbiology Reagents",
+    title: "Hematology Reagents",
     description:
-      "Culture media, gram stain, agars (blood, MacConkey, CLED, XLD), petri dishes, and wire loops",
+      "ABX hematology analyzer reagents including Minclean, Minilyse and Minidil",
     image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=400&fit=crop&auto=format",
-    count: "15+ Products",
+      "/uploads/1781786759132-480450024.jpeg",
+    count: "3+ Products",
+    color: "from-rose-900 to-rose-700",
+    category: "Hematology",
+    search: "ABX",
+  },
+  {
+    title: "Chemistry Analyzer Reagents",
+    description:
+      "Space for ABX C200 chemistry analyzer reagents and related chemistry consumables",
+    image:
+      "/uploads/abx_package.png",
+    count: "ABX C200",
+    color: "from-emerald-900 to-emerald-700",
+    category: "Reagents",
+    search: "ABX C200",
+  },
+  {
+    title: "Readers & Equipment",
+    description:
+      "Readers, analysers, accessories, and supporting instruments for diagnostic workflows",
+    image:
+      "https://www.rapidlabs.co.uk/wp-content/uploads/RL-AFR-300-300x300.jpg",
+    count: "40+ Products",
+    color: "from-sky-900 to-sky-700",
+    category: "Equipment",
+    search: "",
+  },
+  {
+    title: "Reagents & Controls",
+    description:
+      "Blood grouping reagents, latex agglutination, febrile antigens, controls and retained Chamrud microbiology reagents",
+    image:
+      "https://www.rapidlabs.co.uk/wp-content/uploads/Blood-Grouping-BG-B10-Anti-B-rotated-e1703074832244-300x300.jpg",
+    count: "65+ Products",
     color: "from-slate-800 to-slate-700",
+    category: "Reagents",
+    search: "",
+  },
+];
+
+const HOME_STREAMS = [
+  {
+    title: "Diagnostic Products",
+    description:
+      "Rapid test devices, strips, cassettes, urinalysis, serology and point-of-care screening products for clinical laboratories.",
+    links: ["Blood Grouping Reagents", "Rapid Tests & Devices", "Drugs of Abuse Tests", "Urinalysis Strips"],
+    category: "Diagnostics",
+    image: "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=900&h=620&fit=crop&auto=format",
+  },
+  {
+    title: "Vials, Bottles & Closures",
+    description:
+      "Glass and plastic packaging ranges organised by bottle size, colour, cap type, closure and pipette assembly.",
+    links: ["5ml Bottles", "30ml Bottles", "Aluminium Caps", "Dropper Pipettes"],
+    category: "Lab Consumables",
+    image: "https://www.rapidlabs.co.uk/wp-content/uploads/30ml-moulded-blue-bottle-with-30ml-tamper-evident-dropper-assembly-scaled-300x300.jpg",
+  },
+  {
+    title: "Readers, Reagents & Controls",
+    description:
+      "Readers, fluorescence accessories, blood grouping reagents, control materials and retained Chamrud laboratory reagents.",
+    links: ["Readers", "Fluorescence", "Latex Agglutination", "Febrile Antigens"],
+    category: "Equipment",
+    image: "https://www.rapidlabs.co.uk/wp-content/uploads/RL-AFR-300-300x300.jpg",
+  },
+  {
+    title: "Hematology & Chemistry",
+    description:
+      "Dedicated group for ABX hematology reagents now, with ABX C200 chemistry analyzer reagents organised under chemistry reagents.",
+    links: ["ABX Hematology Reagents", "ABX Minclean", "ABX Minilyse", "ABX C200"],
+    category: "Hematology",
+    image: "/uploads/1781786759132-480450024.jpeg",
+  },
+];
+
+const CATALOG_DEPARTMENTS = [
+  {
+    title: "Diagnostic Products",
+    category: "Diagnostics",
+    links: ["Blood Grouping Reagents", "Rapid Tests & Devices", "Infectious Diseases Rapid Strips & Devices", "Drugs of Abuse Rapid Tests", "Urinalysis Strips"],
+  },
+  {
+    title: "Vials & Bottles",
+    category: "Lab Consumables",
+    links: ["5ml Bottles", "10ml Bottles", "20ml Bottles", "30ml Bottles", "50ml Bottles", "100ml Bottles"],
+  },
+  {
+    title: "Caps & Closures",
+    category: "Lab Consumables",
+    links: ["Aluminium Caps", "Caps and Closures", "Atomisers & Spray Caps", "Dropper Pipette Assemblies", "Bamboo Range"],
+  },
+  {
+    title: "Readers & Reagents",
+    category: "Equipment",
+    links: ["Readers", "Fluorescence", "Biochemical Meters", "Control Materials", "Microbiology Reagents"],
+  },
+  {
+    title: "Hematology & Chemistry",
+    category: "Hematology",
+    links: ["ABX Hematology Reagents", "ABX Minclean", "ABX Minilyse", "ABX Minidil", "ABX C200 Chemistry Reagents"],
   },
 ];
 
 const FEATURED_PRODUCTS = [
   {
-    name: "Eppendorf Safe-Lock Microtubes 1.5ml",
-    sku: "SKU: EP-0030120086",
-    price: "K 350",
-    unit: "per 500",
-    badge: "Best Seller",
+    id: "fallback-rl-bottles",
+    name: "5ml Amber Glass Bottles Black Aluminium Cap",
+    sku: "SKU: P-5ABBC",
+    price: "",
+    unit: "Quote only",
+    badge: "Rapid Labs",
     image:
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=300&h=300&fit=crop&auto=format",
-    category: "Consumables",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/5mm-5-300x300.png",
+    category: "Lab Consumables",
+    source: "Rapid Labs",
+    sourceCategory: "Aluminium Caps",
   },
   {
-    name: "Thermo Fisher DPBS Solution 500ml",
-    sku: "SKU: TF-14190094",
-    price: "K 520",
-    unit: "per unit",
-    badge: "In Stock",
+    id: "fallback-rl-psa",
+    name: "PSA Test - whole blood/serum/plasma",
+    sku: "SKU: D-PSA",
+    price: "",
+    unit: "Quote only",
+    badge: "Rapid Labs",
     image:
-      "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=300&h=300&fit=crop&auto=format",
-    category: "Reagents",
-  },
-  {
-    name: "Malaria Rapid Test — Pf/PAN",
-    sku: "SKU: CE-MAL-25",
-    price: "K 1,050",
-    unit: "per 25 tests",
-    badge: "In Stock",
-    image:
-      "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=300&h=300&fit=crop&auto=format",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/Rapid-Test-Device-box-42-300x300.jpg",
     category: "Diagnostics",
+    source: "Rapid Labs",
+    sourceCategory: "Cancer Markers Rapid Strips & Devices",
   },
   {
-    name: "Bio-Rad Mini-PROTEAN Tetra System",
-    sku: "SKU: BR-1658000",
-    price: "K 34,500",
-    unit: "per system",
-    badge: "New",
+    id: "fallback-rl-reagent",
+    name: "Anti-B Monoclonal Blood Grouping Reagent",
+    sku: "SKU: BG-B10",
+    price: "",
+    unit: "Quote only",
+    badge: "Rapid Labs",
     image:
-      "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&h=300&fit=crop&auto=format",
+      "https://www.rapidlabs.co.uk/wp-content/uploads/Blood-Grouping-BG-B10-Anti-B-rotated-e1703074832244-300x300.jpg",
+    category: "Diagnostics",
+    source: "Rapid Labs",
+    sourceCategory: "Blood Grouping Reagents",
+  },
+  {
+    id: "fallback-rl-reader",
+    name: "Urine Analyzer",
+    sku: "RL-ANALYZER",
+    price: "",
+    unit: "Quote only",
+    badge: "Rapid Labs",
+    image:
+      "/uploads/reagent.png",
     category: "Equipment",
-  },
-  {
-    name: "Universal Transport Medium 3ml",
-    sku: "SKU: UTM-3ML-50",
-    price: "K 1,160",
-    unit: "per 50 tubes",
-    badge: "In Stock",
-    image:
-      "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=300&h=300&fit=crop&auto=format",
-    category: "Consumables",
-  },
-  {
-    name: "Haemoglobin Rapid Test HemoCue",
-    sku: "SKU: HC-300-PLUS",
-    price: "K 7,950",
-    unit: "per analyser",
-    badge: "In Stock",
-    image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=300&h=300&fit=crop&auto=format",
-    category: "Equipment",
+    source: "Rapid Labs",
+    sourceCategory: "Readers",
   },
 ];
 
@@ -228,9 +335,9 @@ const BRANDS = [
   "Thermo Fisher Scientific",
   "Eppendorf",
   "Bio-Rad",
-  "Merck",
-  "Sartorius",
-  "Qiagen",
+  "RapidLabs",
+  "Accurate",
+  "Vivacheck",
   "Roche",
   "Beckman Coulter",
 ];
@@ -260,6 +367,7 @@ const BADGE_COLORS: Record<string, string> = {
   "Best Seller": "bg-amber-100 text-amber-800 border-amber-200",
   "In Stock": "bg-emerald-100 text-emerald-800 border-emerald-200",
   "CE Marked": "bg-blue-100 text-blue-800 border-blue-200",
+  "Rapid Labs": "bg-sky-100 text-sky-800 border-sky-200",
   New: "bg-violet-100 text-violet-800 border-violet-200",
 };
 
@@ -268,13 +376,17 @@ export default function App() {
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
-  const [currentView, setCurrentView] = useState<"home" | "reagents-list">("home");
+  const [currentView, setCurrentView] = useState<"home" | "reagents-list" | "category">("home");
   const [reagentsSearch, setReagentsSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState<"name-asc" | "name-desc" | "sku-asc">("name-asc");
+  const itemsPerPage = 24;
 
   const [products, setProducts] = useState<Product[]>(FEATURED_PRODUCTS as any);
   const [cart, setCart] = useState<{product: Product, quantity: number}[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -293,7 +405,7 @@ export default function App() {
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
       return imagePath;
     }
-    return `http://localhost:3001${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
+    return `${imagePath.startsWith('/') ? '' : '/'}${imagePath}`;
   };
 
   const [contactForm, setContactForm] = useState({
@@ -383,12 +495,9 @@ export default function App() {
     const getAbsoluteImageUrl = (imgUrl: string) => {
       if (!imgUrl) return "";
       if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
-        if (imgUrl.includes("localhost")) {
-          return imgUrl.replace("localhost", window.location.hostname);
-        }
         return imgUrl;
       }
-      return `${window.location.protocol}//${window.location.hostname}:3001${imgUrl.startsWith("/") ? "" : "/"}${imgUrl}`;
+      return `${window.location.origin}${imgUrl.startsWith("/") ? "" : "/"}${imgUrl}`;
     };
     const itemsList = cart.map(item => {
       const imgUrl = getAbsoluteImageUrl(item.product.image);
@@ -400,38 +509,75 @@ export default function App() {
     window.open(`https://wa.me/260772071404?text=${message}`, '_blank');
   };
 
-  const handleNavClick = (label: string, parentLabel?: string) => {
+  const handleNavClick = (item: any, parentItem?: any) => {
+    const label = typeof item === "string" ? item : item.label;
     if (label === "Reagents List") {
       setCurrentView("reagents-list");
       setMobileOpen(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
-    } else {
-      setCurrentView("home");
     }
 
-    if (parentLabel === "Brands" || label === "Brands") {
-      if (parentLabel === "Brands") {
-        setSearchQuery(label);
-      } else {
-        setSearchQuery("");
-      }
+    if (label === "Brands") {
+      setCurrentView("home");
+      setMobileOpen(false);
+      setSearchQuery("");
       setActiveCategory("All");
+      setTimeout(() => {
+        const el = document.getElementById("brands");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
       return;
     }
-    const categoryTarget = parentLabel || label;
+
+    if (label === "About Us") {
+      setCurrentView("home");
+      setMobileOpen(false);
+      setTimeout(() => {
+        const el = document.getElementById("about");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+      return;
+    }
+
+    if (label === "Contact") {
+      setCurrentView("home");
+      setMobileOpen(false);
+      setTimeout(() => {
+        const el = document.getElementById("contact");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+      return;
+    }
+
+    // Default: switch to category catalog page
+    setCurrentView("category");
+    setCurrentPage(1);
+
+    const categoryTarget = item.category || parentItem?.category || label;
     const categoryMap: Record<string, string> = {
-      "Lab Consumables": "Consumables",
+      "Lab Consumables": "Lab Consumables",
       "Reagents & Chemicals": "Reagents",
       "Medical Equipment": "Equipment",
-      "Rapid Diagnostics": "Diagnostics"
+      "Rapid Diagnostics": "Diagnostics",
+      "Diagnostic Products": "Diagnostics",
+      "Vials & Bottles": "Lab Consumables",
+      "Caps & Closures": "Lab Consumables",
+      "Readers & Equipment": "Equipment",
+      Reagents: "Reagents",
+      Hematology: "Hematology",
+      All: "All",
     };
     const mapped = categoryMap[categoryTarget];
     if (mapped) {
       setActiveCategory(mapped);
+      setSearchQuery(item.search || "");
+    } else {
+      setActiveCategory("All");
       setSearchQuery("");
     }
     setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const categories = ["All", ...Array.from(new Set(products.map((p) => p.category))).sort()];
@@ -441,9 +587,39 @@ export default function App() {
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchQuery.toLowerCase());
+      p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.sourceCategory || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.description || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.source || "").toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === "name-asc") {
+      return a.name.localeCompare(b.name);
+    } else if (sortBy === "name-desc") {
+      return b.name.localeCompare(a.name);
+    } else if (sortBy === "sku-asc") {
+      return a.sku.localeCompare(b.sku);
+    }
+    return 0;
+  });
+
+  const totalPages = Math.ceil(sorted.length / itemsPerPage);
+  const paginatedProducts = sorted.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const subCategories = activeCategory === "All"
+    ? []
+    : Array.from(
+        new Set(
+          products
+            .filter((p) => !p.hidden && p.category === activeCategory && p.sourceCategory)
+            .map((p) => p.sourceCategory!)
+        )
+      ).sort();
 
   const filteredReagents = products.filter((p) => {
     if (p.hidden) return false;
@@ -454,6 +630,47 @@ export default function App() {
       p.sku.toLowerCase().includes(reagentsSearch.toLowerCase());
     return matchesSearch;
   });
+
+  const streamProducts = (category: string) =>
+    products
+      .filter((product) => !product.hidden && product.category === category)
+      .slice(0, 3);
+
+  const categoryForLink = (defaultCategory: string, link: string) => {
+    if (/hematology|haematology|minclean|minilyse|minidil/i.test(link)) return "Hematology";
+    if (/c200/i.test(link)) return "Reagents";
+    if (/microbiology/i.test(link)) return "Microbiology Reagents";
+    if (/control/i.test(link)) return "All";
+    if (/latex|febrile|blood grouping/i.test(link)) return "Diagnostics";
+    if (/reader|meter|fluorescence/i.test(link)) return "Equipment";
+    return defaultCategory;
+  };
+
+  const getCategoryInfo = (catName: string) => {
+    const found = PRODUCT_CATEGORIES.find(c => c.category === catName);
+    if (found) return found;
+    if (catName === "Microbiology Reagents") {
+      return {
+        title: "Microbiology Reagents",
+        description: "Culture media, agar plates, dehydrated media, and diagnostic reagents for microbiological analysis.",
+        image: "http://localhost:3001/uploads/agar_package.png",
+        count: "Microbiology",
+        color: "from-purple-950 to-purple-800",
+        category: "Microbiology Reagents",
+        search: "",
+      };
+    }
+    return {
+      title: catName === "All" ? "All Products Catalog" : `${catName} Products`,
+      description: "Browse our comprehensive range of high-quality diagnostic kits, reagents, and laboratory consumables.",
+      color: "from-slate-900 to-slate-800",
+      count: "All Products",
+      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&h=760&fit=crop&auto=format",
+      category: catName,
+      search: "",
+    };
+  };
+  const activeCategoryInfo = getCategoryInfo(activeCategory);
 
   return (
     <div
@@ -506,8 +723,18 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-6 h-16">
             {/* Logo */}
-            <a href="#home" onClick={() => setCurrentView("home")} className="flex-shrink-0 flex items-center gap-3 no-underline">
-              <img src="http://localhost:3001/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentView("home");
+                setActiveCategory("All");
+                setSearchQuery("");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="flex-shrink-0 flex items-center gap-3 no-underline"
+            >
+              <img src="/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
               <div>
                 <div
                   className="text-[#003399] font-bold text-base leading-tight tracking-tight"
@@ -529,7 +756,14 @@ export default function App() {
                   type="text"
                   placeholder="Search products, brands, catalogue numbers..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (currentView !== "category") {
+                      setCurrentView("category");
+                      setActiveCategory("All");
+                    }
+                    setCurrentPage(1);
+                  }}
                   className="w-full pl-9 pr-4 py-2 rounded-lg border border-border bg-input-background text-sm focus:outline-none focus:ring-2 focus:ring-[#149CD8]/30 focus:border-[#149CD8] transition-all"
                 />
               </div>
@@ -573,7 +807,7 @@ export default function App() {
                 >
                   <a
                     href={item.href}
-                    onClick={() => handleNavClick(item.label)}
+                    onClick={() => handleNavClick(item)}
                     className="flex items-center gap-1.5 px-4 py-3 text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors font-medium"
                   >
                     {item.label}
@@ -587,7 +821,7 @@ export default function App() {
                         <a
                           key={child.label}
                           href={child.href}
-                          onClick={() => handleNavClick(child.label, item.label)}
+                          onClick={() => handleNavClick(child, item)}
                           className="flex items-center justify-between px-4 py-2.5 text-sm text-foreground hover:bg-secondary hover:text-[#FF9933] transition-colors group/item"
                         >
                           {child.label}
@@ -612,7 +846,14 @@ export default function App() {
                   type="text"
                   placeholder="Search products..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (currentView !== "category") {
+                      setCurrentView("category");
+                      setActiveCategory("All");
+                    }
+                    setCurrentPage(1);
+                  }}
                   className="w-full pl-9 pr-4 py-2 rounded-lg border border-border bg-input-background text-sm focus:outline-none"
                 />
               </div>
@@ -621,7 +862,10 @@ export default function App() {
                   key={item.label}
                   href={item.href}
                   className="block py-2.5 border-b border-border text-sm font-medium text-foreground hover:text-[#FF9933] transition-colors"
-                  onClick={() => handleNavClick(item.label)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item);
+                  }}
                 >
                   {item.label}
                 </a>
@@ -633,65 +877,85 @@ export default function App() {
 
       {currentView === "home" && <>
       {/* Hero section */}
-      <section id="home" className="relative bg-[#003399] overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1400&h=600&fit=crop&auto=format)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#003399] via-[#003399]/90 to-[#003399]/60" />
-        <div className="relative max-w-7xl mx-auto px-4 py-20 md:py-28">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-xs text-white/80 mb-6 backdrop-blur-sm">
-              <div className="w-1.5 h-1.5 bg-[#FF9933] rounded-full animate-pulse" />
-              Trusted Medical Supplier — Lusaka, Zambia
-            </div>
-            <h1
-              className="text-4xl md:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight"
-              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-            >
-              Your Complete
-              <br />
-              <span className="text-[#FF9933]">Medical Lab</span>
-              <br />
-              Supply Partner
-            </h1>
-            <p className="text-white/70 text-lg mb-8 leading-relaxed">
-              Supplying hospitals, clinics, research institutes and laboratories
-              across Zambia with quality laboratory reagents, pharmaceuticals,
-              and medical supplies.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a href="#products" className="flex items-center gap-2 bg-[#FF9933] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#e88820] transition-colors text-sm">
-                Browse Catalogue
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#contact" className="flex items-center gap-2 border border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-sm backdrop-blur-sm">
-                Request a Quote
-              </a>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-6">
-              {[
-                { label: "Products", value: "4,500+" },
-                { label: "Brands", value: "120+" },
-                { label: "Zambian Clients", value: "100+" },
-                { label: "Years Active", value: "3+" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    className="text-2xl font-bold text-white"
-                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-white/50 text-xs uppercase tracking-widest">
-                    {stat.label}
-                  </div>
+      <section id="home" className="bg-white border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 py-10 md:py-14">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-stretch">
+            <div className="bg-[#003399] rounded-xl overflow-hidden relative min-h-[430px] flex items-end">
+              <img
+                src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&h=760&fit=crop&auto=format"
+                alt="Medical laboratory supplies"
+                className="absolute inset-0 w-full h-full object-cover opacity-30"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#003399] via-[#003399]/90 to-[#003399]/40" />
+              <div className="relative p-6 md:p-10 max-w-2xl">
+                <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-xs text-white/85 mb-5 backdrop-blur-sm">
+                  <CheckCircle className="w-3.5 h-3.5 text-[#FF9933]" />
+                  Trusted Medical Supplier - Lusaka, Zambia
                 </div>
+                <h1
+                  className="text-3xl md:text-5xl font-bold text-white mb-5 leading-tight"
+                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                >
+                  Chamrud Enterprise laboratory supply catalogue
+                </h1>
+                <p className="text-white/75 text-base md:text-lg mb-7 leading-relaxed">
+                  Quality diagnostic kits, reagents, consumables and medical supplies for hospitals, clinics, research institutes and laboratories across Zambia.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    onClick={() => {
+                      setCurrentView("category");
+                      setActiveCategory("All");
+                      setSearchQuery("");
+                      setCurrentPage(1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="flex items-center gap-2 bg-[#FF9933] text-white px-5 py-3 rounded-lg font-semibold hover:bg-[#e88820] transition-colors text-sm cursor-pointer border-0"
+                  >
+                    Browse Products
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <a href="#contact" className="flex items-center gap-2 border border-white/30 text-white px-5 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-sm backdrop-blur-sm">
+                    Request a Quote
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              {HOME_STREAMS.map((stream) => (
+                <button
+                  key={stream.title}
+                  onClick={() => {
+                    setCurrentView("category");
+                    setActiveCategory(stream.category);
+                    setSearchQuery("");
+                    setCurrentPage(1);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="group text-left bg-[#f0f6fb] border border-border rounded-xl overflow-hidden hover:border-[#149CD8]/50 hover:shadow-md transition-all grid grid-cols-[120px_1fr] min-h-[132px]"
+                >
+                  <img
+                    src={stream.image}
+                    alt={stream.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="p-4 flex flex-col justify-center">
+                    <div
+                      className="font-bold text-[#003399] text-base mb-1"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      {stream.title}
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mb-2">
+                      {stream.description}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-[#FF9933]">
+                      View products
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </button>
               ))}
             </div>
           </div>
@@ -701,7 +965,7 @@ export default function App() {
       {/* Certification strip */}
       <div className="bg-[#149CD8] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {[
               "ISO 9001:2015 Certified",
               "Wholly Zambian Company",
@@ -735,17 +999,19 @@ export default function App() {
               Everything your laboratory needs
             </h2>
           </div>
-          <a
-            href="#products"
+          <button
             onClick={() => {
+              setCurrentView("category");
               setActiveCategory("All");
               setSearchQuery("");
+              setCurrentPage(1);
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="hidden md:flex items-center gap-1.5 text-sm text-[#149CD8] font-medium hover:gap-2.5 transition-all"
+            className="hidden md:flex items-center gap-1.5 text-sm text-[#149CD8] font-medium hover:gap-2.5 transition-all cursor-pointer border-0 bg-transparent"
           >
             View all categories
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -753,10 +1019,11 @@ export default function App() {
             <div
               key={cat.title}
               onClick={() => {
-                setActiveCategory(cat.title);
-                setSearchQuery("");
-                const el = document.getElementById("featured");
-                if (el) el.scrollIntoView({ behavior: "smooth" });
+                setCurrentView("category");
+                setActiveCategory(cat.category);
+                setSearchQuery(cat.search);
+                setCurrentPage(1);
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="group relative rounded-xl overflow-hidden cursor-pointer bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
@@ -792,109 +1059,250 @@ export default function App() {
         </div>
       </section>
 
-      {/* Featured products */}
-      <section id="featured" className="bg-[#f0f6fb] py-14">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-end justify-between mb-6">
-            <div>
-              <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
-                Product Catalog
-              </div>
-              <h2
-                className="text-2xl md:text-3xl font-bold text-foreground"
+      {/* Catalogue departments */}
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="flex items-end justify-between mb-6">
+          <div>
+            <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
+              Browse Catalogue
+            </div>
+            <h2
+              className="text-2xl md:text-3xl font-bold text-foreground"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            >
+              Product departments
+            </h2>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {CATALOG_DEPARTMENTS.map((department) => (
+            <div key={department.title} className="bg-white border border-border rounded-xl p-5">
+              <button
+                onClick={() => {
+                  setCurrentView("category");
+                  setActiveCategory(department.category);
+                  setSearchQuery("");
+                  setCurrentPage(1);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="text-left w-full flex items-center justify-between gap-3 font-bold text-[#003399] mb-4 hover:text-[#FF9933] transition-colors cursor-pointer border-0 bg-transparent"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
               >
-                Our Products Catalog
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                {filtered.length} of {products.length} items — Add items to request a quotation
-              </p>
+                {department.title}
+                <ChevronRight className="w-4 h-4 flex-shrink-0" />
+              </button>
+              <div className="space-y-2">
+                {department.links.map((link) => (
+                  <button
+                    key={link}
+                    onClick={() => {
+                      setCurrentView("category");
+                      setActiveCategory(categoryForLink(department.category, link));
+                      setSearchQuery(link);
+                      setCurrentPage(1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="block w-full text-left text-xs text-muted-foreground hover:text-[#FF9933] transition-colors cursor-pointer border-0 bg-transparent"
+                  >
+                    {link}
+                  </button>
+                ))}
+              </div>
             </div>
-            <button
-              onClick={() => { setActiveCategory("All"); setSearchQuery(""); }}
-              className="hidden md:flex items-center gap-1.5 text-sm text-[#149CD8] font-medium hover:gap-2.5 transition-all"
+          ))}
+        </div>
+      </section>
+
+      {/* Business streams */}
+      <section className="bg-[#f0f6fb] border-y border-border py-14">
+        <div className="max-w-7xl mx-auto px-4 space-y-10">
+          {HOME_STREAMS.map((stream, index) => {
+            const previewProducts = streamProducts(stream.category);
+            return (
+              <div
+                key={stream.title}
+                className={`grid lg:grid-cols-[0.85fr_1.15fr] gap-6 items-stretch ${
+                  index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                <div className="bg-white border border-border rounded-xl overflow-hidden">
+                  <div className="h-56 overflow-hidden bg-slate-100">
+                    <img
+                      src={stream.image}
+                      alt={stream.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
+                      Chamrud Supply Stream
+                    </div>
+                    <h3
+                      className="text-2xl font-bold text-foreground mb-3"
+                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                    >
+                      {stream.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                      {stream.description}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {stream.links.map((link) => (
+                        <button
+                          key={link}
+                          onClick={() => {
+                            setCurrentView("category");
+                            setActiveCategory(categoryForLink(stream.category, link));
+                            setSearchQuery(link === "Dropper Pipettes" ? "Dropper Pipette" : link);
+                            setCurrentPage(1);
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }}
+                          className="text-left text-xs font-semibold text-[#003399] bg-[#003399]/5 border border-[#003399]/10 rounded-lg px-3 py-2 hover:border-[#FF9933]/40 hover:text-[#FF9933] transition-colors cursor-pointer"
+                        >
+                          {link}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {previewProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="bg-white border border-border rounded-xl overflow-hidden hover:shadow-md transition-shadow"
+                    >
+                      <div className="aspect-square bg-slate-100 overflow-hidden">
+                        <img
+                          src={getImageUrl(product.image)}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <div className="text-[10px] text-muted-foreground font-mono mb-1 tracking-wider line-clamp-1">
+                          {product.sku}
+                        </div>
+                        <h4 className="font-semibold text-sm text-foreground leading-snug line-clamp-3 min-h-[3.9rem]">
+                          {product.name}
+                        </h4>
+                        <button
+                          onClick={() => addToCart(product)}
+                          className="mt-4 w-full inline-flex items-center justify-center gap-1.5 text-xs bg-[#FF9933] text-white px-3 py-2 rounded-lg hover:bg-[#e88820] transition-colors font-semibold cursor-pointer"
+                        >
+                          <ShoppingCart className="w-3.5 h-3.5" />
+                          Add to Basket
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Featured products */}
+      <section id="featured" className="bg-white py-14">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <div className="text-xs uppercase tracking-widest text-[#FF9933] font-semibold mb-2">
+              Featured Products
+            </div>
+            <h2
+              className="text-2xl md:text-3xl font-bold text-foreground"
+              style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
             >
-              Show all
+              Popular Products in Our Catalog
+            </h2>
+            <p className="text-sm text-muted-foreground mt-2 max-w-xl mx-auto">
+              Explore some of our most requested diagnostic kits, reagents, and laboratory consumables.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.filter(p => !p.hidden).slice(0, 4).map((product) => (
+              <div
+                key={product.id}
+                className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="h-44 bg-slate-100 overflow-hidden relative">
+                    <img
+                      src={getImageUrl(product.image)}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div
+                      className={`absolute top-3 left-3 text-[10px] font-semibold border px-2 py-0.5 rounded-full ${BADGE_COLORS[product.badge] || "bg-slate-100 text-slate-700"}`}
+                    >
+                      {product.badge}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="text-[10px] text-muted-foreground font-mono mb-1 tracking-wider">
+                      {product.sku}
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground mb-2 leading-snug line-clamp-2">
+                      {product.name}
+                    </h3>
+                    {(product.sourceCategory || product.description) && (
+                      <div className="mb-3">
+                        {product.sourceCategory && (
+                          <div className="text-[10px] font-semibold uppercase tracking-wide text-[#149CD8] mb-1">
+                            {product.sourceCategory}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="p-4 pt-0 border-t border-slate-50 mt-auto flex items-center justify-between">
+                  <div>
+                    <div className="text-xs font-bold text-[#003399]">
+                      Request quote
+                    </div>
+                    <div className="text-[10px] text-muted-foreground">
+                      {product.unit}
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setSelectedProduct(product)}
+                      className="text-xs border border-border px-3 py-1.5 rounded-lg hover:border-[#149CD8] hover:text-[#149CD8] transition-colors font-medium cursor-pointer bg-transparent"
+                    >
+                      Details
+                    </button>
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="text-xs bg-[#FF9933] text-white px-3 py-1.5 rounded-lg hover:bg-[#e88820] transition-colors font-medium flex items-center gap-1 cursor-pointer border-0"
+                    >
+                      <ShoppingCart className="w-3 h-3" />
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <button
+              onClick={() => {
+                setCurrentView("category");
+                setActiveCategory("All");
+                setSearchQuery("");
+                setCurrentPage(1);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-2 bg-[#003399] hover:bg-[#002266] text-white px-6 py-3 rounded-lg font-semibold transition-all text-sm shadow-sm cursor-pointer border-0"
+            >
+              Browse Full Catalog
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
-
-          {/* Category filter */}
-          <div className="flex gap-2 mb-7 overflow-x-auto pb-1 scrollbar-hide">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                  activeCategory === cat
-                    ? "bg-[#FF9933] text-white"
-                    : "bg-white text-muted-foreground border border-border hover:border-[#FF9933] hover:text-[#FF9933]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filtered.map((product) => (
-              <div
-                key={product.sku}
-                className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group"
-              >
-                <div className="h-44 bg-slate-100 overflow-hidden relative">
-                  <img
-                    src={getImageUrl(product.image)}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div
-                    className={`absolute top-3 left-3 text-[10px] font-semibold border px-2 py-0.5 rounded-full ${BADGE_COLORS[product.badge]}`}
-                  >
-                    {product.badge}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <div className="text-[10px] text-muted-foreground font-mono mb-1 tracking-wider">
-                    {product.sku}
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground mb-3 leading-snug">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div
-                        className="text-xs md:text-sm font-bold text-[#003399]"
-                        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                      >
-                        Price on Request
-                      </div>
-                      <div className="text-[10px] text-muted-foreground">
-                        {product.unit}
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <button className="text-xs border border-border px-3 py-1.5 rounded-lg hover:border-[#149CD8] hover:text-[#149CD8] transition-colors font-medium">
-                        Details
-                      </button>
-                      <button onClick={() => addToCart(product as any)} className="text-xs bg-[#FF9933] text-white px-3 py-1.5 rounded-lg hover:bg-[#e88820] transition-colors font-medium flex items-center gap-1 cursor-pointer">
-                        <ShoppingCart className="w-3 h-3" />
-                        Add
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {filtered.length === 0 && (
-            <div className="text-center py-20 text-muted-foreground">
-              <div className="text-4xl mb-4">🔍</div>
-              <p className="font-semibold text-foreground mb-1">No products found</p>
-              <p className="text-sm">Try a different search or category filter.</p>
-              <button onClick={() => { setActiveCategory("All"); setSearchQuery(""); }} className="mt-4 text-sm text-[#149CD8] hover:underline">Clear filters</button>
-            </div>
-          )}
         </div>
       </section>
 
@@ -1091,6 +1499,368 @@ export default function App() {
         </div>
       </section>
       </> }
+
+      {currentView === "category" && (
+        <section id="category-page" className="bg-[#f0f6fb] min-h-[80vh] pb-16">
+          {/* Category Hero Banner */}
+          <div className={`relative bg-gradient-to-r ${activeCategoryInfo.color} text-white py-12 md:py-16 overflow-hidden`}>
+            <img
+              src={activeCategoryInfo.image}
+              alt={activeCategoryInfo.title}
+              className="absolute inset-0 w-full h-full object-cover opacity-15"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+            <div className="relative max-w-7xl mx-auto px-4">
+              {/* Breadcrumbs */}
+              <div className="flex items-center gap-2 text-white/60 text-xs mb-4">
+                <button
+                  onClick={() => {
+                    setCurrentView("home");
+                    setActiveCategory("All");
+                    setSearchQuery("");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer bg-transparent border-0 text-white/60 text-xs p-0 font-medium"
+                >
+                  Home
+                </button>
+                <ChevronRight className="w-3 h-3 text-white/40" />
+                <button
+                  onClick={() => {
+                    setActiveCategory("All");
+                    setSearchQuery("");
+                    setCurrentPage(1);
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer bg-transparent border-0 text-white/60 text-xs p-0 font-medium"
+                >
+                  Catalog
+                </button>
+                {activeCategory !== "All" && (
+                  <>
+                    <ChevronRight className="w-3 h-3 text-white/40" />
+                    <span className="text-white font-medium">{activeCategoryInfo.title}</span>
+                  </>
+                )}
+              </div>
+              
+              <h1 className="text-3xl md:text-4xl font-bold mb-3" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                {activeCategoryInfo.title}
+              </h1>
+              <p className="text-white/80 text-sm md:text-base max-w-2xl leading-relaxed mb-0">
+                {activeCategoryInfo.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Main Catalog Area */}
+          <div className="max-w-7xl mx-auto px-4 mt-8">
+            <div className="grid lg:grid-cols-[260px_1fr] gap-8 items-start">
+              {/* Sidebar Filters */}
+              <aside className="bg-white border border-border rounded-xl p-5 shadow-sm space-y-6">
+                <div>
+                  <h3 className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-3">
+                    Departments
+                  </h3>
+                  <div className="space-y-1.5">
+                    <button
+                      onClick={() => {
+                        setActiveCategory("All");
+                        setSearchQuery("");
+                        setCurrentPage(1);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
+                        activeCategory === "All"
+                          ? "bg-[#003399] text-white"
+                          : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
+                      }`}
+                    >
+                      <span>All Products</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeCategory === "All" ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                        {products.filter((p) => !p.hidden).length}
+                      </span>
+                    </button>
+
+                    {Array.from(new Set(products.map((p) => p.category)))
+                      .filter(Boolean)
+                      .sort()
+                      .map((catName) => {
+                        const isSelected = activeCategory === catName;
+                        const count = products.filter((p) => !p.hidden && p.category === catName).length;
+                        const displayTitle = catName === "Diagnostics" ? "Diagnostic Products" :
+                                             catName === "Lab Consumables" ? "Glass & Plastic Vials" :
+                                             catName === "Equipment" ? "Readers & Equipment" :
+                                             catName === "Hematology" ? "Hematology Reagents" :
+                                             catName === "Reagents" ? "Reagents & Controls" : catName;
+                        return (
+                          <button
+                            key={catName}
+                            onClick={() => {
+                              setActiveCategory(catName);
+                              setSearchQuery("");
+                              setCurrentPage(1);
+                            }}
+                            className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
+                              isSelected
+                                ? "bg-[#003399] text-white"
+                                : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
+                            }`}
+                          >
+                            <span>{displayTitle}</span>
+                            <span className={`text-[10px] px-2 py-0.5 rounded-full ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                              {count}
+                            </span>
+                          </button>
+                        );
+                      })}
+                  </div>
+                </div>
+
+                {/* Subcategories */}
+                {activeCategory !== "All" && subCategories.length > 0 && (
+                  <div>
+                    <h3 className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-3">
+                      Filter by Type
+                    </h3>
+                    <div className="space-y-1">
+                      {subCategories.map((subName) => {
+                        const isSelected = searchQuery === subName;
+                        return (
+                          <button
+                            key={subName}
+                            onClick={() => {
+                              setSearchQuery(isSelected ? "" : subName);
+                              setCurrentPage(1);
+                            }}
+                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between cursor-pointer border-0 ${
+                              isSelected
+                                ? "bg-[#FF9933]/15 text-[#FF9933] font-semibold"
+                                : "text-muted-foreground bg-transparent hover:bg-slate-50 hover:text-[#FF9933]"
+                            }`}
+                          >
+                            <span className="truncate">{subName}</span>
+                            {isSelected && <X className="w-3 h-3 flex-shrink-0 text-[#FF9933]" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </aside>
+
+              {/* Product Catalog Grid */}
+              <div className="space-y-6">
+                {/* Controls Bar */}
+                <div className="bg-white border border-border rounded-xl p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="relative w-full sm:max-w-xs">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <input
+                      type="text"
+                      placeholder="Search within this category..."
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setCurrentPage(1);
+                      }}
+                      className="w-full pl-9 pr-4 py-2 rounded-lg border border-border text-xs focus:outline-none focus:ring-2 focus:ring-[#149CD8]/30 focus:border-[#149CD8]"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => {
+                          setSearchQuery("");
+                          setCurrentPage(1);
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer bg-transparent border-0"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+                    <div className="text-xs text-muted-foreground whitespace-nowrap">
+                      Showing <span className="font-semibold text-foreground">{filtered.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}-{Math.min(filtered.length, currentPage * itemsPerPage)}</span> of <span className="font-semibold text-foreground">{filtered.length}</span> products
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-muted-foreground whitespace-nowrap">Sort by:</span>
+                      <select
+                        value={sortBy}
+                        onChange={(e) => {
+                          setSortBy(e.target.value as any);
+                          setCurrentPage(1);
+                        }}
+                        className="text-xs border border-border rounded-lg px-2.5 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-[#149CD8]"
+                      >
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                        <option value="sku-asc">SKU Code</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Active Tags */}
+                {searchQuery && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs text-muted-foreground">Active filters:</span>
+                    <span className="inline-flex items-center gap-1.5 bg-[#149CD8]/10 text-[#149CD8] border border-[#149CD8]/20 px-2.5 py-1 rounded-full text-xs font-medium">
+                      "{searchQuery}"
+                      <button
+                        onClick={() => {
+                          setSearchQuery("");
+                          setCurrentPage(1);
+                        }}
+                        className="hover:text-red-500 transition-colors cursor-pointer bg-transparent border-0 p-0 text-[#149CD8] flex items-center"
+                      >
+                        <X className="w-3 h-3 ml-1" />
+                      </button>
+                    </span>
+                  </div>
+                )}
+
+                {/* Products Grid */}
+                {paginatedProducts.length === 0 ? (
+                  <div className="bg-white rounded-xl border border-border p-12 text-center text-muted-foreground shadow-sm">
+                    <div className="text-4xl mb-4">🔍</div>
+                    <p className="font-semibold text-foreground mb-1 text-base">No products found</p>
+                    <p className="text-sm">Try broadening your search query or choosing another category.</p>
+                    <button
+                      onClick={() => {
+                        setSearchQuery("");
+                        setActiveCategory("All");
+                        setCurrentPage(1);
+                      }}
+                      className="mt-4 text-xs font-semibold bg-[#003399] text-white px-4 py-2 rounded-lg hover:bg-[#002266] transition-colors cursor-pointer border-0"
+                    >
+                      Clear All Filters
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                    {paginatedProducts.map((product) => (
+                      <div
+                        key={product.id}
+                        className="bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group flex flex-col justify-between"
+                      >
+                        <div>
+                          <div className="h-44 bg-slate-100 overflow-hidden relative">
+                            <img
+                              src={getImageUrl(product.image)}
+                              alt={product.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div
+                              className={`absolute top-3 left-3 text-[10px] font-semibold border px-2 py-0.5 rounded-full ${BADGE_COLORS[product.badge] || "bg-slate-100 text-slate-700"}`}
+                            >
+                              {product.badge}
+                            </div>
+                          </div>
+                          <div className="p-4">
+                            <div className="text-[10px] text-muted-foreground font-mono mb-1 tracking-wider">
+                              {product.sku}
+                            </div>
+                            <h3 className="text-sm font-semibold text-foreground mb-2 leading-snug line-clamp-2">
+                              {product.name}
+                            </h3>
+                            {(product.sourceCategory || product.description) && (
+                              <div className="mb-3">
+                                {product.sourceCategory && (
+                                  <div className="text-[10px] font-semibold uppercase tracking-wide text-[#149CD8] mb-1">
+                                    {product.sourceCategory}
+                                  </div>
+                                )}
+                                {product.description && (
+                                  <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                                    {product.description}
+                                  </p>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <div className="p-4 pt-0 border-t border-slate-50 mt-auto flex items-center justify-between">
+                          <div>
+                            <div className="text-xs font-bold text-[#003399]">
+                              Request quote
+                            </div>
+                            <div className="text-[10px] text-muted-foreground">
+                              {product.unit}
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => setSelectedProduct(product)}
+                              className="text-xs border border-border px-3 py-1.5 rounded-lg hover:border-[#149CD8] hover:text-[#149CD8] transition-colors font-medium cursor-pointer bg-transparent"
+                            >
+                              Details
+                            </button>
+                            <button
+                              onClick={() => addToCart(product)}
+                              className="text-xs bg-[#FF9933] text-white px-3 py-1.5 rounded-lg hover:bg-[#e88820] transition-colors font-medium flex items-center gap-1 cursor-pointer border-0"
+                            >
+                              <ShoppingCart className="w-3 h-3" />
+                              Add
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-1.5 pt-4">
+                    <button
+                      onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                      disabled={currentPage === 1}
+                      className="p-2 border border-border rounded-lg bg-white text-muted-foreground hover:text-foreground hover:border-slate-350 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    
+                    {/* Page Numbers */}
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
+                      const isNear = Math.abs(currentPage - pageNum) <= 1;
+                      const isEdge = pageNum === 1 || pageNum === totalPages;
+                      
+                      if (!isNear && !isEdge) {
+                        if (pageNum === 2 || pageNum === totalPages - 1) {
+                          return <span key={pageNum} className="text-xs text-muted-foreground px-1">...</span>;
+                        }
+                        return null;
+                      }
+                      
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => setCurrentPage(pageNum)}
+                          className={`w-9 h-9 rounded-lg text-xs font-semibold transition-all cursor-pointer border-0 ${
+                            currentPage === pageNum
+                              ? "bg-[#003399] text-white"
+                              : "bg-white border border-border text-muted-foreground hover:text-foreground hover:border-slate-350"
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+
+                    <button
+                      onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                      disabled={currentPage === totalPages}
+                      className="p-2 border border-border rounded-lg bg-white text-muted-foreground hover:text-foreground hover:border-slate-350 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {currentView === "reagents-list" &&
         <section id="reagents-list-page" className="bg-[#f0f6fb] min-h-[60vh] py-14">
@@ -1348,7 +2118,7 @@ export default function App() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img src="http://localhost:3001/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
+                <img src="/uploads/chamrud_logo.png" alt="Chamrud Logo" className="w-10 h-10 rounded-lg object-contain shadow-sm bg-white p-0.5" />
                 <div>
                   <div
                     className="text-white font-bold text-base leading-tight"
@@ -1391,12 +2161,12 @@ export default function App() {
               </h4>
               <ul className="space-y-2.5">
                 {[
-                  { label: "Laboratory Consumables", href: "#products" },
-                  { label: "Reagents & Chemicals", href: "#products" },
-                  { label: "Medical Equipment", href: "#products" },
-                  { label: "Rapid Diagnostics", href: "#products" },
-                  { label: "Pharmaceuticals", href: "#products" },
-                  { label: "Office & School Supplies", href: "#products" },
+                  { label: "Diagnostic Products", href: "#products" },
+                  { label: "Vials & Bottles", href: "#products" },
+                  { label: "Caps & Closures", href: "#products" },
+                  { label: "Readers & Equipment", href: "#products" },
+                  { label: "Reagents", href: "#products" },
+                  { label: "Microbiology Reagents", href: "#products" },
                 ].map((item) => (
                   <li key={item.label}>
                     <a
@@ -1511,6 +2281,105 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Product Details Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="px-5 py-4 border-b border-border flex items-center justify-between bg-[#003399] text-white">
+              <div>
+                <div className="text-[10px] uppercase tracking-widest text-white/60">Product Details</div>
+                <div className="font-bold text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                  Chamrud Catalogue
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto">
+              <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-0">
+                <div className="bg-slate-100 p-6 flex items-center justify-center">
+                  <img
+                    src={getImageUrl(selectedProduct.image)}
+                    alt={selectedProduct.name}
+                    className="w-full max-h-[420px] object-contain rounded-xl bg-white border border-border"
+                  />
+                </div>
+                <div className="p-6 md:p-8">
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span className={`text-[10px] font-semibold border px-2.5 py-1 rounded-full ${BADGE_COLORS[selectedProduct.badge] || "bg-slate-100 text-slate-700 border-slate-200"}`}>
+                      {selectedProduct.badge}
+                    </span>
+                    <span className="text-[10px] font-semibold border px-2.5 py-1 rounded-full bg-[#149CD8]/10 text-[#149CD8] border-[#149CD8]/20">
+                      {selectedProduct.category}
+                    </span>
+                    {selectedProduct.sourceCategory && (
+                      <span className="text-[10px] font-semibold border px-2.5 py-1 rounded-full bg-[#FF9933]/10 text-[#FF9933] border-[#FF9933]/20">
+                        {selectedProduct.sourceCategory}
+                      </span>
+                    )}
+                  </div>
+
+                  <h2
+                    className="text-2xl md:text-3xl font-bold text-foreground leading-tight mb-3"
+                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    {selectedProduct.name}
+                  </h2>
+
+                  <div className="grid sm:grid-cols-2 gap-3 mb-6">
+                    <div className="rounded-xl border border-border bg-[#f0f6fb] p-3">
+                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Catalogue Number</div>
+                      <div className="font-mono text-xs text-foreground break-words">{selectedProduct.sku}</div>
+                    </div>
+                    <div className="rounded-xl border border-border bg-[#f0f6fb] p-3">
+                      <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-1">Pack / Unit</div>
+                      <div className="text-xs font-semibold text-foreground">{selectedProduct.unit || "Quote only"}</div>
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <div className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-2">Product Information</div>
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                      {selectedProduct.description || "Detailed product information is available on request from our sales team."}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      onClick={() => {
+                        addToCart(selectedProduct);
+                        setSelectedProduct(null);
+                      }}
+                      className="inline-flex items-center gap-2 bg-[#FF9933] text-white px-5 py-3 rounded-lg hover:bg-[#e88820] transition-colors text-sm font-bold"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Add to Basket
+                    </button>
+                    {selectedProduct.sourceUrl && (
+                      <a
+                        href={selectedProduct.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 border border-border px-5 py-3 rounded-lg hover:border-[#149CD8] hover:text-[#149CD8] transition-colors text-sm font-semibold"
+                      >
+                        Source Page
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Cart Sidebar */}
       {isCartOpen && (
         <div className="fixed inset-0 z-[100] flex justify-end bg-black/50 backdrop-blur-sm transition-opacity">
@@ -1538,7 +2407,7 @@ export default function App() {
                     <div className="flex-1 min-w-0">
                       <div className="text-xs text-muted-foreground truncate">{item.product.sku}</div>
                       <div className="font-semibold text-sm leading-tight line-clamp-2 mb-1">{item.product.name}</div>
-                      <div className="text-[#003399] font-semibold text-xs">Price on Request</div>
+                      <div className="text-[#003399] font-semibold text-xs">Request quote</div>
                     </div>
                     <div className="flex flex-col items-center justify-between">
                       <button onClick={() => updateQuantity(item.product.id, 1)} className="w-6 h-6 rounded bg-slate-100 hover:bg-slate-200 flex items-center justify-center">
