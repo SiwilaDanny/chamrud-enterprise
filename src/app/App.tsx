@@ -2381,7 +2381,8 @@ export default function App() {
       {isAdminOpen && (
         <AdminPanel
           onClose={() => setIsAdminOpen(false)}
-          onPostsChange={() => {}}
+          onPostsChange={setPosts}
+          onProductsChange={setProducts}
         />
       )}
     </div>

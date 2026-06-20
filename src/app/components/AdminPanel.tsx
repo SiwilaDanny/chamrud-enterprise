@@ -31,9 +31,10 @@ const CATEGORY_COLORS: Record<Post["category"], string> = {
 interface AdminPanelProps {
   onClose: () => void;
   onPostsChange: (posts: Post[]) => void;
+  onProductsChange: (products: Product[]) => void;
 }
 
-export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) {
+export default function AdminPanel({ onClose, onPostsChange, onProductsChange }: AdminPanelProps) {
   const [authed, setAuthed] = useState(() => !!localStorage.getItem(AUTH_KEY));
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
@@ -146,6 +147,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
     
     setProducts(updated);
     await saveProducts(updated);
+    onProductsChange(updated);
     setView("list");
     showToast(view === "newProduct" ? "Product added!" : "Product updated!");
   }
@@ -155,6 +157,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
     const updated = products.filter((p) => p.id !== id);
     setProducts(updated);
     await saveProducts(updated);
+    onProductsChange(updated);
     showToast("Product removed.");
   }
 
@@ -164,6 +167,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
     );
     setProducts(updated);
     await saveProducts(updated);
+    onProductsChange(updated);
     const product = updated.find(p => p.id === id);
     showToast(product?.hidden ? "Product hidden from public." : "Product is now visible.");
   }
@@ -202,6 +206,7 @@ export default function AdminPanel({ onClose, onPostsChange }: AdminPanelProps) 
       );
       setProducts(updated);
       await saveProducts(updated);
+      onProductsChange(updated);
       setSelectedProductIds([]);
       showToast(`Successfully updated image for ${selectedProductIds.length} products!`);
     } else {
