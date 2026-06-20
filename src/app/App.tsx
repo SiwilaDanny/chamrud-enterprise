@@ -820,11 +820,11 @@ export default function App() {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-stretch">
             <div className="bg-[#003399] rounded-xl overflow-hidden relative min-h-[430px] flex items-end">
               <img
-                src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&h=760&fit=crop&auto=format"
-                alt="Medical laboratory supplies"
-                className="absolute inset-0 w-full h-full object-cover opacity-30"
+                src="/chamrud-enterprise-banner.jpeg"
+                alt="Chamrud Enterprise"
+                className="absolute inset-0 w-full h-full object-cover object-top opacity-40"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#003399] via-[#003399]/90 to-[#003399]/40" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#003399] via-[#003399]/85 to-[#003399]/50" />
               <div className="relative p-6 md:p-10 max-w-2xl">
                 <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 text-xs text-white/85 mb-5 backdrop-blur-sm">
                   <CheckCircle className="w-3.5 h-3.5 text-[#FF9933]" />
@@ -900,6 +900,44 @@ export default function App() {
         </div>
       </section>
 
+      {/* Chamrud Enterprise promotional banner */}
+      <section className="bg-gradient-to-b from-white to-[#f0f6fb] py-12 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-6">
+            <span className="inline-block bg-[#003399]/10 text-[#003399] text-xs font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3">Your Trusted Medical Partner</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#003399]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              Quality. Reliability. Excellence.
+            </h2>
+          </div>
+          <div className="relative group mx-auto max-w-3xl">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#003399] via-[#FF9933] to-[#149CD8] rounded-2xl blur-sm opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="/chamrud-enterprise-banner.jpeg"
+                alt="Chamrud Enterprise – Rapid Test Kits, Lab Equipment & Reagents"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            {[
+              { label: "Rapid Test Kits", color: "#FF9933" },
+              { label: "Lab Equipment & Materials", color: "#003399" },
+              { label: "Lab Reagents & Consumables", color: "#149CD8" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-semibold shadow-md"
+                style={{ backgroundColor: item.color }}
+              >
+                <CheckCircle className="w-4 h-4" />
+                {item.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Certification strip */}
       <div className="bg-[#149CD8] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3">
@@ -922,6 +960,62 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      {/* Featured products auto-scroller */}
+      {products.filter(p => p.featured && !p.hidden).length > 0 && (
+        <section className="bg-[#003399] py-8 overflow-hidden border-b border-white/10">
+          <style>{`
+            @keyframes marquee-scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-track {
+              animation: marquee-scroll 32s linear infinite;
+              display: flex;
+              width: max-content;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          <div className="max-w-7xl mx-auto px-4 mb-4 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+              <span className="text-white font-bold text-sm uppercase tracking-widest">Featured Products</span>
+            </div>
+            <button
+              onClick={() => { setCurrentView("category"); setActiveCategory("All"); setSearchQuery(""); setCurrentPage(1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className="text-white/70 hover:text-white text-xs font-semibold flex items-center gap-1 transition-colors"
+            >
+              View all <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="overflow-hidden">
+            <div className="marquee-track">
+              {[...products.filter(p => p.featured && !p.hidden), ...products.filter(p => p.featured && !p.hidden)].map((product, idx) => (
+                <button
+                  key={`${product.id}-${idx}`}
+                  onClick={() => { setSelectedProduct(product); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  className="flex-shrink-0 mx-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden hover:bg-white/20 transition-all group w-44"
+                >
+                  <div className="h-28 overflow-hidden bg-white/5">
+                    <img
+                      src={getImageUrl(product.image)}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => { (e.target as HTMLImageElement).src = "/uploads/reagent.png"; }}
+                    />
+                  </div>
+                  <div className="p-3 text-left">
+                    <div className="text-white text-xs font-semibold line-clamp-2 leading-tight mb-1">{product.name}</div>
+                    <div className="text-[#FF9933] text-xs font-bold">{product.price}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Product categories */}
       <section id="products" className="max-w-7xl mx-auto px-4 py-14">
@@ -2381,8 +2475,8 @@ export default function App() {
       {isAdminOpen && (
         <AdminPanel
           onClose={() => setIsAdminOpen(false)}
-          onPostsChange={setPosts}
-          onProductsChange={setProducts}
+          onPostsChange={(updated) => setPosts(updated)}
+          onProductsChange={(updated) => setProducts(updated)}
         />
       )}
     </div>

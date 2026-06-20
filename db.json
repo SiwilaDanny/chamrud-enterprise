@@ -40,11 +40,11 @@
       "id": "p_mnu6w2gjg",
       "name": "CETRIFUGE TUBES            EA",
       "sku": "SKU: CETR-322",
-      "price": "",
+      "price": "0",
       "unit": "per CH",
       "category": "Reagents",
       "badge": "In Stock",
-      "image": "/uploads/tubes.png",
+      "image": "/uploads/1781988328008-947826703.jpeg",
       "hidden": false
     },
     {
@@ -1355,7 +1355,8 @@
       "description": "Infectious Diseases Rapid Test Strips and Devices",
       "source": "Rapid Labs",
       "sourceUrl": "https://www.rapidlabs.co.uk/product/hbcab-test-serumplasma/",
-      "sourceCategory": "Infectious Diseases Rapid Strips & Devices"
+      "sourceCategory": "Infectious Diseases Rapid Strips & Devices",
+      "featured": true
     },
     {
       "id": "rapidlabs_2314",
@@ -1411,7 +1412,8 @@
       "description": "Infectious Diseases Rapid Test Strips & Devices",
       "source": "Rapid Labs",
       "sourceUrl": "https://www.rapidlabs.co.uk/product/hiv-12o-tri-line-test-whole-bloodserumplasma/",
-      "sourceCategory": "Infectious Diseases Rapid Strips & Devices"
+      "sourceCategory": "Infectious Diseases Rapid Strips & Devices",
+      "featured": true
     },
     {
       "id": "rapidlabs_2329",
@@ -2041,7 +2043,8 @@
       "description": "Rapid Labs Urinalysis Reagent Strips are regularly stocked in 3P, 10P and 11P for immediate delivery. All other parameters or specific combinations are subject to the 4-6 week lead time.",
       "source": "Rapid Labs",
       "sourceUrl": "https://www.rapidlabs.co.uk/product/urinalysis-strips-10-parameter/",
-      "sourceCategory": "Urinalysis Strips"
+      "sourceCategory": "Urinalysis Strips",
+      "featured": true
     },
     {
       "id": "rapidlabs_2405",
@@ -2447,7 +2450,8 @@
       "description": "Standard Febrile Antigen – Widal Kit Salmonella with Positive and Negative Controls",
       "source": "Rapid Labs",
       "sourceUrl": "https://www.rapidlabs.co.uk/product/widal-kit-salmonella-hahbhchdoaobocod-tve-tve-control-2/",
-      "sourceCategory": "Febrile Antigens"
+      "sourceCategory": "Febrile Antigens",
+      "featured": true
     },
     {
       "id": "rapidlabs_2498",
@@ -2461,7 +2465,8 @@
       "description": "RPR Test for the Serodiagnosis of Syphilis",
       "source": "Rapid Labs",
       "sourceUrl": "https://www.rapidlabs.co.uk/product/rpr-kit-100t250t500t/",
-      "sourceCategory": "RPR & VDRL"
+      "sourceCategory": "RPR & VDRL",
+      "featured": true
     },
     {
       "id": "rapidlabs_2505",

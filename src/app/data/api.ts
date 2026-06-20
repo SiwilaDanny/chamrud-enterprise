@@ -32,6 +32,7 @@ export interface Product {
   badge: string;
   image: string;
   hidden?: boolean;
+  featured?: boolean;
   description?: string;
   source?: string;
   sourceUrl?: string;
