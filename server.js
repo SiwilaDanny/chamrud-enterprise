@@ -224,10 +224,14 @@ app.get(/.*/, (req, res, next) => {
 });
 
 const PORT = 3001;
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
-  console.log('ℹ  Products & posts are now served by Supabase (see .env for credentials).');
-});
-server.ref();
-const keepAlive = setInterval(() => {}, 1 << 30);
-server.on('close', () => clearInterval(keepAlive));
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Backend server running on http://localhost:${PORT}`);
+    console.log('ℹ  Products & posts are now served by Supabase (see .env for credentials).');
+  });
+  server.ref();
+  const keepAlive = setInterval(() => {}, 1 << 30);
+  server.on('close', () => clearInterval(keepAlive));
+}
+
+export default app;
