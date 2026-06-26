@@ -253,13 +253,24 @@ export async function uploadImage(file: File): Promise<string | null> {
         contentType: file.type,
       });
 
-    if (uploadError) throw uploadError;
+    if (uploadError) {
+      console.error("[api] Supabase upload error:", uploadError);
+      if (uploadError.message.includes("row-level security")) {
+        alert("Supabase Upload Blocked: You must run the SQL policies to allow Admin Uploads. Check your Supabase Dashboard SQL Editor.");
+      }
+      throw uploadError;
+    }
 
     const { data } = supabase.storage.from(BUCKET).getPublicUrl(filename);
     return data.publicUrl;
   } catch (error) {
-    console.error("[api] uploadImage error:", error);
-    // Graceful fallback: try the local Express endpoint if Supabase fails
+    console.error("[api] uploadImage fallback:", error);
+    // Only attempt local upload fallback if we are running locally (localhost)
+    if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+      return null;
+    }
+    
+    // Graceful fallback: try the local Express endpoint if Supabase fails locally
     try {
       const formData = new FormData();
       formData.append("image", file);
