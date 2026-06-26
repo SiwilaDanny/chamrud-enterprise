@@ -843,7 +843,7 @@ export default function AdminPanel({ onClose, onPostsChange, onProductsChange, o
                         const ok = await saveSetting("company", settingsForm);
                         setIsSavingSettings(false);
                         if (ok) {
-                          const next: SiteSettings = { company: settingsForm, brands: brandsForm, testimonials: testimonialsForm };
+                          const next: SiteSettings = { company: settingsForm, brands: brandsForm, testimonials: testimonialsForm, streams: streamsForm, categories: categoriesForm };
                           onSettingsChange?.(next);
                           showToast("Company info saved!");
                         } else { showToast("Failed to save.", false); }
@@ -889,7 +889,7 @@ export default function AdminPanel({ onClose, onPostsChange, onProductsChange, o
                         const ok = await saveSetting("brands", brandsForm);
                         setIsSavingSettings(false);
                         if (ok) {
-                          onSettingsChange?.({ company: settingsForm, brands: brandsForm, testimonials: testimonialsForm });
+                          onSettingsChange?.({ company: settingsForm, brands: brandsForm, testimonials: testimonialsForm, streams: streamsForm, categories: categoriesForm });
                           showToast("Brands saved!");
                         } else { showToast("Failed to save.", false); }
                       }}
@@ -935,7 +935,7 @@ export default function AdminPanel({ onClose, onPostsChange, onProductsChange, o
                         const ok = await saveSetting("testimonials", testimonialsForm);
                         setIsSavingSettings(false);
                         if (ok) {
-                          onSettingsChange?.({ company: settingsForm, brands: brandsForm, testimonials: testimonialsForm });
+                          onSettingsChange?.({ company: settingsForm, brands: brandsForm, testimonials: testimonialsForm, streams: streamsForm, categories: categoriesForm });
                           showToast("Testimonials saved!");
                         } else { showToast("Failed to save.", false); }
                       }}
