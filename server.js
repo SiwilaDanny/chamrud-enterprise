@@ -83,12 +83,37 @@ app.get('/api/products', async (req, res) => {
       }
     }
 
+    // Priority diagnostic tests appear first in the catalogue
+    const PRIORITY_KEYWORDS = [
+      'malaria', 'typhoid', 'pregnancy', 'syphilis', 'hepatitis',
+      'h. pylori', 'h pylori', 'helicobacter', 'pylori',
+      'gonorrhea', 'gonorrhoea', 'chlamydia',
+      'influenza', 'flu test', 'influenza a', 'influenza b',
+    ];
+
+    function getPriority(product) {
+      const name = (product.name || '').toLowerCase();
+      const category = (product.category || '').toLowerCase();
+      const haystack = name + ' ' + category;
+      const matched = PRIORITY_KEYWORDS.some(kw => haystack.includes(kw));
+      return matched ? 0 : 1;
+    }
+
+    allProducts.sort((a, b) => {
+      const pa = getPriority(a);
+      const pb = getPriority(b);
+      if (pa !== pb) return pa - pb;
+      // Within the same priority group, keep alphabetical order
+      return (a.name || '').localeCompare(b.name || '');
+    });
+
     res.json(allProducts);
   } catch (e) {
     console.error('[proxy] /api/products error:', e.message);
     res.status(500).json({ error: 'Failed to fetch products' });
   }
 });
+
 
 app.get('/api/posts', async (req, res) => {
   try {
