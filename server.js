@@ -34,8 +34,8 @@ function loadEnv() {
 function getSupabase() {
   const env = loadEnv();
   return {
-    url: env['VITE_SUPABASE_URL'] || '',
-    key: env['VITE_SUPABASE_ANON_KEY'] || '',
+    url: process.env.VITE_SUPABASE_URL || env['VITE_SUPABASE_URL'] || '',
+    key: process.env.VITE_SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || env['VITE_SUPABASE_SERVICE_ROLE_KEY'] || env['VITE_SUPABASE_ANON_KEY'] || '',
   };
 }
 
@@ -163,8 +163,8 @@ app.post('/api/contact', async (req, res) => {
     }
   } catch (_) {}
 
-  const gmailUser = envVars['GMAIL_USER'];
-  const gmailPass = envVars['GMAIL_APP_PASSWORD'];
+  const gmailUser = process.env.GMAIL_USER || envVars['GMAIL_USER'];
+  const gmailPass = process.env.GMAIL_APP_PASSWORD || envVars['GMAIL_APP_PASSWORD'];
 
   if (!gmailUser || !gmailPass || gmailPass === 'your_app_password_here') {
     return res.json({ success: true, mode: 'no-email', message: 'Configure GMAIL_APP_PASSWORD in .env to receive emails.' });
