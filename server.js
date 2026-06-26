@@ -121,7 +121,11 @@ app.get('/api/settings', async (req, res) => {
 
 // Serve legacy /uploads/ folder so existing image paths keep working
 const UPLOADS_DIR = path.join(__dirname, 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+} catch (e) {
+  console.warn('Could not create uploads dir (likely read-only filesystem on Vercel)');
+}
 app.use('/uploads', express.static(UPLOADS_DIR));
 
 // Keep a minimal multer upload for the local fallback used by api.ts
