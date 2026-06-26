@@ -85,10 +85,12 @@ app.get('/api/products', async (req, res) => {
 
     // Priority diagnostic tests appear first in the catalogue
     const PRIORITY_KEYWORDS = [
-      'malaria', 'typhoid', 'pregnancy', 'syphilis', 'hepatitis',
+      'malaria', 'typhoid', 'pregnancy', 'syphilis',
+      'hepatitis', 'hepatitis b', 'hbsag', 'hbv', 'hbcab', 'hbeag',
       'h. pylori', 'h pylori', 'helicobacter', 'pylori',
       'gonorrhea', 'gonorrhoea', 'chlamydia',
       'influenza', 'flu test', 'influenza a', 'influenza b',
+      'hiv', 'hiv test', 'hiv 1', 'hiv 2', 'hiv1', 'hiv2', 'anti-hiv',
     ];
 
     function getPriority(product) {
