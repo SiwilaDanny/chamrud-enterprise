@@ -21,3 +21,4 @@ Thumbs.db
 
 # Vite cache
 .vite/
+\nuploads/\nscratch/\nbuild/\npublic/index.html
