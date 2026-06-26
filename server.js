@@ -13,80 +13,135 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-const DB_FILE = path.join(__dirname, 'db.json');
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
-
-// Ensure uploads directory exists
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// ─── Supabase credentials (server-side only — never sent to browser) ──────────
+function loadEnv() {
+  const envVars = {};
+  try {
+    const envPath = path.join(__dirname, '.env');
+    if (fs.existsSync(envPath)) {
+      fs.readFileSync(envPath, 'utf8').split('\n').forEach(line => {
+        const trimmed = line.trim();
+        if (trimmed && !trimmed.startsWith('#')) {
+          const [key, ...rest] = trimmed.split('=');
+          envVars[key.trim()] = rest.join('=').trim();
+        }
+      });
+    }
+  } catch (_) {}
+  return envVars;
 }
 
-// Serve uploads folder statically
+function getSupabase() {
+  const env = loadEnv();
+  return {
+    url: env['VITE_SUPABASE_URL'] || '',
+    key: env['VITE_SUPABASE_ANON_KEY'] || '',
+  };
+}
+
+function sbHeaders() {
+  const { key } = getSupabase();
+  return {
+    'apikey': key,
+    'Authorization': `Bearer ${key}`,
+    'Content-Type': 'application/json',
+  };
+}
+
+// ─── SUPABASE PROXY ENDPOINTS ─────────────────────────────────────────────────
+// All data reads from the public site go through here so the Supabase
+// secret key is NEVER sent to the browser.
+
+app.get('/api/products', async (req, res) => {
+  try {
+    const { url } = getSupabase();
+    const allProducts = [];
+    let from = 0;
+    let to = 999;
+    let hasMore = true;
+
+    while (hasMore) {
+      const r = await fetch(`${url}/rest/v1/products?select=*&order=name.asc`, {
+        headers: {
+          ...sbHeaders(),
+          'Range': `${from}-${to}`
+        },
+      });
+
+      if (!r.ok) {
+        return res.status(r.status).json({ error: await r.text() });
+      }
+
+      const data = await r.json();
+      allProducts.push(...data);
+
+      if (data.length < 1000) {
+        hasMore = false;
+      } else {
+        from += 1000;
+        to += 1000;
+      }
+    }
+
+    res.json(allProducts);
+  } catch (e) {
+    console.error('[proxy] /api/products error:', e.message);
+    res.status(500).json({ error: 'Failed to fetch products' });
+  }
+});
+
+app.get('/api/posts', async (req, res) => {
+  try {
+    const { url } = getSupabase();
+    const r = await fetch(`${url}/rest/v1/posts?select=*&order=created_at.desc`, {
+      headers: sbHeaders(),
+    });
+    if (!r.ok) return res.status(r.status).json({ error: await r.text() });
+    res.json(await r.json());
+  } catch (e) {
+    console.error('[proxy] /api/posts error:', e.message);
+    res.status(500).json({ error: 'Failed to fetch posts' });
+  }
+});
+
+app.get('/api/settings', async (req, res) => {
+  try {
+    const { url } = getSupabase();
+    const r = await fetch(`${url}/rest/v1/site_settings?select=*`, {
+      headers: sbHeaders(),
+    });
+    if (!r.ok) return res.status(r.status).json({ error: await r.text() });
+    res.json(await r.json());
+  } catch (e) {
+    console.error('[proxy] /api/settings error:', e.message);
+    res.status(500).json({ error: 'Failed to fetch settings' });
+  }
+});
+
+
+// Serve legacy /uploads/ folder so existing image paths keep working
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 app.use('/uploads', express.static(UPLOADS_DIR));
 
-// Configure Multer for image uploads
+// Keep a minimal multer upload for the local fallback used by api.ts
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, UPLOADS_DIR);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
-  }
+  },
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// Read DB
-function readDB() {
-  try {
-    const data = fs.readFileSync(DB_FILE, 'utf8');
-    return JSON.parse(data);
-  } catch (err) {
-    return { products: [], posts: [] };
-  }
-}
-
-// Write DB
-function writeDB(data) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-}
-
-// --- PRODUCTS ---
-app.get('/api/products', (req, res) => {
-  const db = readDB();
-  res.json(db.products || []);
-});
-
-app.post('/api/products', (req, res) => {
-  const db = readDB();
-  db.products = req.body;
-  writeDB(db);
-  res.json({ success: true });
-});
-
-// --- POSTS ---
-app.get('/api/posts', (req, res) => {
-  const db = readDB();
-  res.json(db.posts || []);
-});
-
-app.post('/api/posts', (req, res) => {
-  const db = readDB();
-  db.posts = req.body;
-  writeDB(db);
-  res.json({ success: true });
-});
-
-// --- UPLOAD ---
 app.post('/api/upload', upload.single('image'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-  const imageUrl = `/uploads/${req.file.filename}`;
-  res.json({ url: imageUrl });
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  res.json({ url: `/uploads/${req.file.filename}` });
 });
 
-// --- CONTACT FORM ---
+// ─── CONTACT FORM ────────────────────────────────────────────────────────────
+// Data reads are proxied through /api/products, /api/posts, /api/settings above.
+// This endpoint handles the contact form email relay only.
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body;
   if (!name || !email || !message) {
@@ -112,12 +167,7 @@ app.post('/api/contact', async (req, res) => {
   const gmailPass = envVars['GMAIL_APP_PASSWORD'];
 
   if (!gmailUser || !gmailPass || gmailPass === 'your_app_password_here') {
-    // Email not configured — still save inquiry to db.json and return 200
-    const db = readDB();
-    db.inquiries = db.inquiries || [];
-    db.inquiries.push({ id: Date.now().toString(), name, email, subject, message, receivedAt: new Date().toISOString() });
-    writeDB(db);
-    return res.json({ success: true, mode: 'saved', message: 'Inquiry saved. Configure GMAIL_APP_PASSWORD in .env to also receive emails.' });
+    return res.json({ success: true, mode: 'no-email', message: 'Configure GMAIL_APP_PASSWORD in .env to receive emails.' });
   }
 
   try {
@@ -150,17 +200,11 @@ app.post('/api/contact', async (req, res) => {
             </div>
           </div>
           <div style="padding:16px 24px;background:#f0f0f0;text-align:center;">
-            <p style="margin:0;font-size:11px;color:#999;">Sent via Chamrud Enterprise website · sales.chamrud@gmail.com</p>
+            <p style="margin:0;font-size:11px;color:#999;">Sent via Chamrud Enterprise website · sales@chamrud.com</p>
           </div>
         </div>
       `,
     });
-
-    // Also save to db
-    const db = readDB();
-    db.inquiries = db.inquiries || [];
-    db.inquiries.push({ id: Date.now().toString(), name, email, subject, message, receivedAt: new Date().toISOString() });
-    writeDB(db);
 
     res.json({ success: true, mode: 'email' });
   } catch (err) {
@@ -169,9 +213,20 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+// Serve static frontend assets from react-scripts build directory
+const DIST_DIR = path.join(__dirname, 'dist');
+app.use(express.static(DIST_DIR));
+
+// Catch-all to serve index.html for client-side navigation
+app.get(/.*/, (req, res, next) => {
+  if (req.path.startsWith('/api')) return next();
+  res.sendFile(path.join(DIST_DIR, 'index.html'));
+});
+
 const PORT = 3001;
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
+  console.log('ℹ  Products & posts are now served by Supabase (see .env for credentials).');
 });
 server.ref();
 const keepAlive = setInterval(() => {}, 1 << 30);

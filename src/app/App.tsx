@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProducts, fetchPosts, getImageUrl, getStaticPosts, getStaticProducts, Product, Post } from "./data/api";
+import { fetchProducts, fetchPosts, fetchSettings, getImageUrl, Product, Post, SiteSettings, DEFAULT_SETTINGS } from "./data/api";
 import AdminPanel from "./components/AdminPanel";
 import {
   Phone,
@@ -93,18 +93,6 @@ const NAV_ITEMS = [
       { label: "Microbiology Reagents", href: "#products", search: "Microbiology" },
     ],
   },
-  {
-    label: "Hematology & Chemistry",
-    href: "#products",
-    category: "Hematology",
-    children: [
-      { label: "ABX Hematology Reagents", href: "#products", category: "Hematology", search: "ABX" },
-      { label: "ABX Minclean", href: "#products", category: "Hematology", search: "Minclean" },
-      { label: "ABX Minilyse", href: "#products", category: "Hematology", search: "Minilyse" },
-      { label: "ABX Minidil", href: "#products", category: "Hematology", search: "Minidil" },
-      { label: "ABX C200 Chemistry Reagents", href: "#products", category: "Reagents", search: "ABX C200" },
-    ],
-  },
   { label: "Brands", href: "#brands", children: [] },
   { label: "About Us", href: "#about", children: [] },
   { label: "Contact", href: "#contact", children: [] },
@@ -115,8 +103,7 @@ const PRODUCT_CATEGORIES = [
     title: "Diagnostic Products",
     description:
       "Blood grouping, serology, rapid tests, urinalysis, infectious disease, DOA and point-of-care diagnostics",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/Rapid-Test-Device-box-42-300x300.jpg",
+    image: "/uploads/cat_diagnostic.png",
     count: "800+ Products",
     color: "from-blue-900 to-blue-700",
     category: "Diagnostics",
@@ -126,8 +113,7 @@ const PRODUCT_CATEGORIES = [
     title: "Glass & Plastic Vials",
     description:
       "Amber, blue, clear, green and matte glass bottles, Boston bottles, jars, vials and containers",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/30ml-moulded-blue-bottle-with-30ml-tamper-evident-dropper-assembly-scaled-300x300.jpg",
+    image: "/uploads/cat_vials.png",
     count: "900+ Products",
     color: "from-cyan-900 to-cyan-700",
     category: "Lab Consumables",
@@ -137,41 +123,17 @@ const PRODUCT_CATEGORIES = [
     title: "Caps, Closures & Pipettes",
     description:
       "Aluminium caps, atomisers, spray caps, dropper pipette assemblies and closure systems",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/Cap-18mm-all-colours-group-no-bg-1-300x300.jpg",
+    image: "/uploads/cat_caps.png",
     count: "300+ Products",
     color: "from-indigo-900 to-indigo-700",
     category: "Lab Consumables",
     search: "Caps",
   },
   {
-    title: "Hematology Reagents",
-    description:
-      "ABX hematology analyzer reagents including Minclean, Minilyse and Minidil",
-    image:
-      "/uploads/1781786759132-480450024.jpeg",
-    count: "3+ Products",
-    color: "from-rose-900 to-rose-700",
-    category: "Hematology",
-    search: "ABX",
-  },
-  {
-    title: "Chemistry Analyzer Reagents",
-    description:
-      "Space for ABX C200 chemistry analyzer reagents and related chemistry consumables",
-    image:
-      "/uploads/abx_package.png",
-    count: "ABX C200",
-    color: "from-emerald-900 to-emerald-700",
-    category: "Reagents",
-    search: "ABX C200",
-  },
-  {
     title: "Readers & Equipment",
     description:
       "Readers, analysers, accessories, and supporting instruments for diagnostic workflows",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/RL-AFR-300-300x300.jpg",
+    image: "/uploads/cat_readers.png",
     count: "40+ Products",
     color: "from-sky-900 to-sky-700",
     category: "Equipment",
@@ -181,8 +143,7 @@ const PRODUCT_CATEGORIES = [
     title: "Reagents & Controls",
     description:
       "Blood grouping reagents, latex agglutination, febrile antigens, controls and retained Chamrud microbiology reagents",
-    image:
-      "https://www.rapidlabs.co.uk/wp-content/uploads/Blood-Grouping-BG-B10-Anti-B-rotated-e1703074832244-300x300.jpg",
+    image: "/uploads/cat_reagents.png",
     count: "65+ Products",
     color: "from-slate-800 to-slate-700",
     category: "Reagents",
@@ -197,7 +158,7 @@ const HOME_STREAMS = [
       "Rapid test devices, strips, cassettes, urinalysis, serology and point-of-care screening products for clinical laboratories.",
     links: ["Blood Grouping Reagents", "Rapid Tests & Devices", "Drugs of Abuse Tests", "Urinalysis Strips"],
     category: "Diagnostics",
-    image: "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=900&h=620&fit=crop&auto=format",
+    image: "/uploads/cat_diagnostic.png",
   },
   {
     title: "Vials, Bottles & Closures",
@@ -205,7 +166,7 @@ const HOME_STREAMS = [
       "Glass and plastic packaging ranges organised by bottle size, colour, cap type, closure and pipette assembly.",
     links: ["5ml Bottles", "30ml Bottles", "Aluminium Caps", "Dropper Pipettes"],
     category: "Lab Consumables",
-    image: "https://www.rapidlabs.co.uk/wp-content/uploads/30ml-moulded-blue-bottle-with-30ml-tamper-evident-dropper-assembly-scaled-300x300.jpg",
+    image: "/uploads/cat_vials.png",
   },
   {
     title: "Readers, Reagents & Controls",
@@ -213,15 +174,7 @@ const HOME_STREAMS = [
       "Readers, fluorescence accessories, blood grouping reagents, control materials and retained Chamrud laboratory reagents.",
     links: ["Readers", "Fluorescence", "Latex Agglutination", "Febrile Antigens"],
     category: "Equipment",
-    image: "https://www.rapidlabs.co.uk/wp-content/uploads/RL-AFR-300-300x300.jpg",
-  },
-  {
-    title: "Hematology & Chemistry",
-    description:
-      "Dedicated group for ABX hematology reagents now, with ABX C200 chemistry analyzer reagents organised under chemistry reagents.",
-    links: ["ABX Hematology Reagents", "ABX Minclean", "ABX Minilyse", "ABX C200"],
-    category: "Hematology",
-    image: "/uploads/1781786759132-480450024.jpeg",
+    image: "/uploads/cat_readers.png",
   },
 ];
 
@@ -245,11 +198,6 @@ const CATALOG_DEPARTMENTS = [
     title: "Readers & Reagents",
     category: "Equipment",
     links: ["Readers", "Fluorescence", "Biochemical Meters", "Control Materials", "Microbiology Reagents"],
-  },
-  {
-    title: "Hematology & Chemistry",
-    category: "Hematology",
-    links: ["ABX Hematology Reagents", "ABX Minclean", "ABX Minilyse", "ABX Minidil", "ABX C200 Chemistry Reagents"],
   },
 ];
 
@@ -276,38 +224,6 @@ const WHY_CHOOSE = [
   },
 ];
 
-const BRANDS = [
-  "Thermo Fisher Scientific",
-  "Eppendorf",
-  "Bio-Rad",
-  "RapidLabs",
-  "Accurate",
-  "Vivacheck",
-  "Roche",
-  "Beckman Coulter",
-];
-
-const TESTIMONIALS = [
-  {
-    name: "Fairview Hospital",
-    role: "Procurement — Lusaka, Zambia",
-    text: "Chamrud Enterprise consistently delivers quality reagents on time. Their dedicated service and attention to our supply needs makes them our preferred supplier.",
-    rating: 5,
-  },
-  {
-    name: "Kanyama General Hospital",
-    role: "Medical Supplies — Lusaka, Zambia",
-    text: "We have been sourcing medical consumables and diagnostic kits from Chamrud for several years. Competitive pricing and a reliable supply chain every time.",
-    rating: 5,
-  },
-  {
-    name: "Royal Hospital",
-    role: "Laboratory Department — Lusaka, Zambia",
-    text: "The breadth of their catalogue is excellent. From basic lab supplies to pharmaceuticals — Chamrud Enterprise is our single-source supplier of choice in Zambia.",
-    rating: 5,
-  },
-];
-
 const BADGE_COLORS: Record<string, string> = {
   "Best Seller": "bg-amber-100 text-amber-800 border-amber-200",
   "In Stock": "bg-emerald-100 text-emerald-800 border-emerald-200",
@@ -316,23 +232,59 @@ const BADGE_COLORS: Record<string, string> = {
   New: "bg-violet-100 text-violet-800 border-violet-200",
 };
 
+const getBrandLogo = (brandName: string) => {
+  const name = brandName.toLowerCase();
+  if (name.includes("thermo")) {
+    return <img src="/brands/thermo_fisher.svg" alt={brandName} className="h-7 w-auto object-contain max-w-[120px]" />;
+  }
+  if (name.includes("eppendorf")) {
+    return <img src="/brands/eppendorf.svg" alt={brandName} className="h-7 w-auto object-contain max-w-[100px]" />;
+  }
+  if (name.includes("bio-rad") || name.includes("biorad")) {
+    return <img src="/brands/bio_rad.svg" alt={brandName} className="h-7 w-auto object-contain max-w-[100px]" />;
+  }
+  if (name.includes("rapid")) {
+    return <img src="/brands/rapid_labs.png" alt={brandName} className="h-8 w-auto object-contain max-w-[100px]" />;
+  }
+  if (name.includes("accurate")) {
+    return <img src="/brands/accurate.gif" alt={brandName} className="h-9 w-auto object-contain max-w-[100px] mix-blend-multiply" />;
+  }
+  if (name.includes("viva")) {
+    return <img src="/brands/viva_test.png" alt={brandName} className="h-8 w-auto object-contain max-w-[100px] mix-blend-multiply" />;
+  }
+  if (name.includes("beckman") || name.includes("coulter")) {
+    return <img src="/brands/beckman_coulter.svg" alt={brandName} className="h-7 w-auto object-contain max-w-[120px]" />;
+  }
+  return (
+    <svg className="w-8 h-8 text-[#FF9933]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 3h12M18 3v3a4 4 0 0 1-1.3 3L11 15v5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-5l-5.7-6A4 4 0 0 1 5 6V3h1z" />
+    </svg>
+  );
+};
+
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openNav, setOpenNav] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
-  const [currentView, setCurrentView] = useState<"home" | "reagents-list" | "category">("home");
+  const [currentView, setCurrentView] = useState<"home" | "reagents-list" | "category" | "diagnostics" | "vials" | "closures" | "equipment">("home");
+  const [subCategoryFilter, setSubCategoryFilter] = useState("All");
   const [reagentsSearch, setReagentsSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<"name-asc" | "name-desc" | "sku-asc">("name-asc");
   const itemsPerPage = 24;
 
-  const [products, setProducts] = useState<Product[]>(() => getStaticProducts());
+  const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<{product: Product, quantity: number}[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [posts, setPosts] = useState<Post[]>(() => getStaticPosts());
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [siteSettings, setSiteSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+
+  useEffect(() => {
+    fetchSettings().then(s => setSiteSettings(s));
+  }, []);
 
   useEffect(() => {
     if (!isAdminOpen) {
@@ -342,6 +294,8 @@ export default function App() {
       fetchPosts().then(fetched => {
         setPosts(fetched);
       });
+      // Refresh settings when admin closes (they may have saved changes)
+      fetchSettings().then(s => setSiteSettings(s));
     }
   }, [isAdminOpen]);
 
@@ -444,15 +398,47 @@ export default function App() {
     }).join('%0A%0A');
     const message =
       `Hello Chamrud Enterprise! 👋%0A%0AI would like to request a quotation for the following items:%0A%0A${itemsList}%0A%0APlease send me a formal quotation. Thank you!`;
-    window.open(`https://wa.me/260772071404?text=${message}`, '_blank');
+    window.open(`https://wa.me/${siteSettings.company.whatsapp}?text=${message}`, '_blank');
+  };
+
+  const navigateToCategoryPage = (category: string, subCategory: string = "All", initialSearch: string = "") => {
+    const cat = category.toLowerCase();
+    
+    setSearchQuery(initialSearch);
+    setSubCategoryFilter(subCategory);
+    setCurrentPage(1);
+
+    if (category === "All") {
+      setCurrentView("category");
+      setActiveCategory("All");
+    } else if (cat.includes("diag") || cat === "diagnostics") {
+      setCurrentView("diagnostics");
+      setActiveCategory("Diagnostics");
+    } else if (cat.includes("vial") || cat === "glass & plastic vials") {
+      setCurrentView("vials");
+      setActiveCategory("Lab Consumables");
+    } else if (cat.includes("cap") || cat === "caps, closures & pipettes") {
+      setCurrentView("closures");
+      setActiveCategory("Lab Consumables");
+    } else if (cat.includes("equip") || cat === "readers & equipment") {
+      setCurrentView("equipment");
+      setActiveCategory("Equipment");
+    } else if (cat.includes("reagent") || cat === "reagents & controls" || cat === "reagents") {
+      setCurrentView("reagents-list");
+      setActiveCategory("Reagents");
+    } else {
+      setCurrentView("category");
+      setActiveCategory(category);
+    }
+    
+    setMobileOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNavClick = (item: any, parentItem?: any) => {
     const label = typeof item === "string" ? item : item.label;
-    if (label === "Reagents List") {
-      setCurrentView("reagents-list");
-      setMobileOpen(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (label === "Reagents List" || label === "Reagents") {
+      navigateToCategoryPage("Reagents");
       return;
     }
 
@@ -488,48 +474,107 @@ export default function App() {
       return;
     }
 
-    // Default: switch to category catalog page
-    setCurrentView("category");
-    setCurrentPage(1);
-
     const categoryTarget = item.category || parentItem?.category || label;
-    const categoryMap: Record<string, string> = {
-      "Lab Consumables": "Lab Consumables",
-      "Reagents & Chemicals": "Reagents",
-      "Medical Equipment": "Equipment",
-      "Rapid Diagnostics": "Diagnostics",
-      "Diagnostic Products": "Diagnostics",
-      "Vials & Bottles": "Lab Consumables",
-      "Caps & Closures": "Lab Consumables",
-      "Readers & Equipment": "Equipment",
-      Reagents: "Reagents",
-      Hematology: "Hematology",
-      All: "All",
-    };
-    const mapped = categoryMap[categoryTarget];
-    if (mapped) {
-      setActiveCategory(mapped);
-      setSearchQuery(item.search || "");
-    } else {
-      setActiveCategory("All");
-      setSearchQuery("");
+    let targetCat = categoryTarget;
+    
+    if (label === "Vials & Bottles") {
+      targetCat = "vials";
+    } else if (label === "Caps & Closures") {
+      targetCat = "closures";
+    } else if (parentItem?.label === "Vials & Bottles") {
+      targetCat = "vials";
+    } else if (parentItem?.label === "Caps & Closures") {
+      targetCat = "closures";
     }
-    setMobileOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const subFilter = parentItem ? label : "All";
+    navigateToCategoryPage(targetCat, subFilter, item.search || "");
   };
 
   const categories = ["All", ...Array.from(new Set(products.map((p) => p.category))).sort()];
   const filtered = products.filter((p) => {
     if (p.hidden) return false;
-    const matchesCategory = activeCategory === "All" || p.category === activeCategory;
+
+    // Filter by view-specific categories and rules
+    if (currentView === "diagnostics") {
+      if (p.category !== "Diagnostics") return false;
+      if (subCategoryFilter !== "All") {
+        const sf = subCategoryFilter.toLowerCase();
+        if (sf.includes("rapid")) {
+          if (!/rapid|device|cassette|panel|card|strip/i.test(p.name)) return false;
+        } else if (sf.includes("blood grouping")) {
+          if (!/blood grouping|grouping|anti-a|anti-b|anti-d|cell|screen panel/i.test(p.name)) return false;
+        } else if (sf.includes("infectious")) {
+          if (!/infectious|malaria|syphilis|hiv|hcv|hbsag|dengue|typhoid|chlamydia|strep|influenza|h\. pylori|hpylori|hp/i.test(p.name)) return false;
+        } else if (sf.includes("abuse")) {
+          if (!/drug|abuse|doa|mam|morphine|thc|amp|mop|bar|bzo|coc|met|mdma|opiate|panel|cup|saliva|urine/i.test(p.name)) return false;
+        } else if (sf.includes("urinalysis")) {
+          if (!/urinalysis|urine strip|parameter|combina/i.test(p.name)) return false;
+        } else if (sf.includes("covid") || sf.includes("respiratory")) {
+          if (!/covid|sars|cov|respiratory|influenza|flu/i.test(p.name)) return false;
+        }
+      }
+    } else if (currentView === "vials") {
+      if (p.category !== "Lab Consumables") return false;
+      if (/cap|closure|atomiser|spray|pipette|dropper|pump|insert|bamboo|rack/i.test(p.name)) return false;
+      if (subCategoryFilter !== "All") {
+        if (subCategoryFilter.includes("5ml")) {
+          if (!/5ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("10ml")) {
+          if (!/10ml|15ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("20ml")) {
+          if (!/20ml|25ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("30ml")) {
+          if (!/30ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("50ml")) {
+          if (!/50ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("100ml")) {
+          if (!/100ml/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Other")) {
+          if (/5ml|10ml|15ml|20ml|25ml|30ml|50ml|100ml/i.test(p.name)) return false;
+        }
+      }
+    } else if (currentView === "closures") {
+      if (p.category !== "Lab Consumables") return false;
+      if (!/cap|closure|atomiser|spray|pipette|dropper|pump|insert|bamboo|rack/i.test(p.name)) return false;
+      if (subCategoryFilter !== "All") {
+        if (subCategoryFilter.includes("Aluminium")) {
+          if (!/aluminium/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Atomiser")) {
+          if (!/atomiser|spray/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Dropper")) {
+          if (!/dropper|pipette/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Bamboo")) {
+          if (!/bamboo/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Pot") || subCategoryFilter.includes("Jar")) {
+          if (!/pot|jar/i.test(p.name)) return false;
+        }
+      }
+    } else if (currentView === "equipment") {
+      if (p.category !== "Equipment") return false;
+      if (subCategoryFilter !== "All") {
+        if (subCategoryFilter.includes("Reader")) {
+          if (!/reader|analyzer/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("Biochemical")) {
+          if (!/meter|biochemical/i.test(p.name)) return false;
+        } else if (subCategoryFilter.includes("PCR")) {
+          if (!/pcr|accessory/i.test(p.name)) return false;
+        }
+      }
+    } else {
+      const matchesCategory = activeCategory === "All" || p.category === activeCategory;
+      if (!matchesCategory) return false;
+    }
+
     const matchesSearch =
+      !searchQuery ||
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.sku.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (p.sourceCategory || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (p.description || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (p.source || "").toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+      (p.description || "").toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesSearch;
   });
 
   const sorted = [...filtered].sort((a, b) => {
@@ -585,7 +630,8 @@ export default function App() {
   };
 
   const getCategoryInfo = (catName: string) => {
-    const found = PRODUCT_CATEGORIES.find(c => c.category === catName);
+    const cats = siteSettings.categories || PRODUCT_CATEGORIES;
+    const found = cats.find(c => c.category === catName);
     if (found) return found;
     if (catName === "Microbiology Reagents") {
       return {
@@ -620,18 +666,18 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-9">
           <div className="flex items-center gap-6">
             <a
-              href="tel:+260772071404"
+              href={`tel:${siteSettings.company.phone}`}
               className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity"
             >
               <Phone className="w-3 h-3" />
-              +260 772 071 404
+              {siteSettings.company.phone}
             </a>
             <a
-              href="mailto:sales.chamrud@gmail.com"
+              href={`mailto:${siteSettings.company.email}`}
               className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity"
             >
               <Mail className="w-3 h-3" />
-              sales.chamrud@gmail.com
+              {siteSettings.company.email}
             </a>
           </div>
           <div className="hidden md:flex items-center gap-4">
@@ -841,13 +887,7 @@ export default function App() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <button
-                    onClick={() => {
-                      setCurrentView("category");
-                      setActiveCategory("All");
-                      setSearchQuery("");
-                      setCurrentPage(1);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
+                    onClick={() => navigateToCategoryPage("All")}
                     className="flex items-center gap-2 bg-[#FF9933] text-white px-5 py-3 rounded-lg font-semibold hover:bg-[#e88820] transition-colors text-sm cursor-pointer border-0"
                   >
                     Browse Products
@@ -861,16 +901,10 @@ export default function App() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-              {HOME_STREAMS.map((stream) => (
+              {(siteSettings.streams || HOME_STREAMS).map((stream) => (
                 <button
                   key={stream.title}
-                  onClick={() => {
-                    setCurrentView("category");
-                    setActiveCategory(stream.category);
-                    setSearchQuery("");
-                    setCurrentPage(1);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
+                  onClick={() => navigateToCategoryPage(stream.category)}
                   className="group text-left bg-[#f0f6fb] border border-border rounded-xl overflow-hidden hover:border-[#149CD8]/50 hover:shadow-md transition-all grid grid-cols-[120px_1fr] min-h-[132px]"
                 >
                   <img
@@ -984,7 +1018,7 @@ export default function App() {
               <span className="text-white font-bold text-sm uppercase tracking-widest">Featured Products</span>
             </div>
             <button
-              onClick={() => { setCurrentView("category"); setActiveCategory("All"); setSearchQuery(""); setCurrentPage(1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              onClick={() => navigateToCategoryPage("All")}
               className="text-white/70 hover:text-white text-xs font-semibold flex items-center gap-1 transition-colors"
             >
               View all <ChevronRight className="w-3.5 h-3.5" />
@@ -1032,13 +1066,7 @@ export default function App() {
             </h2>
           </div>
           <button
-            onClick={() => {
-              setCurrentView("category");
-              setActiveCategory("All");
-              setSearchQuery("");
-              setCurrentPage(1);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+            onClick={() => navigateToCategoryPage("All")}
             className="hidden md:flex items-center gap-1.5 text-sm text-[#149CD8] font-medium hover:gap-2.5 transition-all cursor-pointer border-0 bg-transparent"
           >
             View all categories
@@ -1047,15 +1075,14 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {PRODUCT_CATEGORIES.map((cat) => (
+          {(siteSettings.categories || PRODUCT_CATEGORIES).map((cat) => (
             <div
               key={cat.title}
               onClick={() => {
-                setCurrentView("category");
-                setActiveCategory(cat.category);
-                setSearchQuery(cat.search);
-                setCurrentPage(1);
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                let target = cat.category;
+                if (cat.title === "Glass & Plastic Vials") target = "vials";
+                else if (cat.title === "Caps, Closures & Pipettes") target = "closures";
+                navigateToCategoryPage(target, "All", cat.search);
               }}
               className="group relative rounded-xl overflow-hidden cursor-pointer bg-card border border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
@@ -1111,11 +1138,10 @@ export default function App() {
             <div key={department.title} className="bg-white border border-border rounded-xl p-5">
               <button
                 onClick={() => {
-                  setCurrentView("category");
-                  setActiveCategory(department.category);
-                  setSearchQuery("");
-                  setCurrentPage(1);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  let target = department.category;
+                  if (department.title === "Vials & Bottles") target = "vials";
+                  else if (department.title === "Caps & Closures") target = "closures";
+                  navigateToCategoryPage(target);
                 }}
                 className="text-left w-full flex items-center justify-between gap-3 font-bold text-[#003399] mb-4 hover:text-[#FF9933] transition-colors cursor-pointer border-0 bg-transparent"
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
@@ -1128,11 +1154,17 @@ export default function App() {
                   <button
                     key={link}
                     onClick={() => {
-                      setCurrentView("category");
-                      setActiveCategory(categoryForLink(department.category, link));
-                      setSearchQuery(link);
-                      setCurrentPage(1);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      let target = categoryForLink(department.category, link);
+                      if (department.title === "Vials & Bottles") target = "vials";
+                      else if (department.title === "Caps & Closures") target = "closures";
+                      
+                      let subFilter = "All";
+                      let searchVal = link;
+                      if (target === "vials" || target === "closures" || target === "Diagnostics" || target === "Equipment") {
+                        subFilter = link;
+                        searchVal = "";
+                      }
+                      navigateToCategoryPage(target, subFilter, searchVal);
                     }}
                     className="block w-full text-left text-xs text-muted-foreground hover:text-[#FF9933] transition-colors cursor-pointer border-0 bg-transparent"
                   >
@@ -1148,7 +1180,7 @@ export default function App() {
       {/* Business streams */}
       <section className="bg-[#f0f6fb] border-y border-border py-14">
         <div className="max-w-7xl mx-auto px-4 space-y-10">
-          {HOME_STREAMS.map((stream, index) => {
+          {(siteSettings.streams || HOME_STREAMS).map((stream, index) => {
             const previewProducts = streamProducts(stream.category);
             return (
               <div
@@ -1179,15 +1211,26 @@ export default function App() {
                       {stream.description}
                     </p>
                     <div className="grid grid-cols-2 gap-2">
-                      {stream.links.map((link) => (
+                      {(stream.links || []).map((link) => (
                         <button
                           key={link}
                           onClick={() => {
-                            setCurrentView("category");
-                            setActiveCategory(categoryForLink(stream.category, link));
-                            setSearchQuery(link === "Dropper Pipettes" ? "Dropper Pipette" : link);
-                            setCurrentPage(1);
-                            window.scrollTo({ top: 0, behavior: "smooth" });
+                            let target = categoryForLink(stream.category, link);
+                            if (stream.title.includes("Vials")) {
+                              if (link.includes("Cap") || link.includes("Pipette") || link.includes("Closure")) {
+                                target = "closures";
+                              } else {
+                                target = "vials";
+                              }
+                            }
+                            
+                            let subFilter = "All";
+                            let searchVal = link === "Dropper Pipettes" ? "Dropper Pipette" : link;
+                            if (target === "vials" || target === "closures" || target === "Diagnostics" || target === "Equipment") {
+                              subFilter = link === "Dropper Pipettes" ? "Dropper Pipettes" : link;
+                              searchVal = "";
+                            }
+                            navigateToCategoryPage(target, subFilter, searchVal);
                           }}
                           className="text-left text-xs font-semibold text-[#003399] bg-[#003399]/5 border border-[#003399]/10 rounded-lg px-3 py-2 hover:border-[#FF9933]/40 hover:text-[#FF9933] transition-colors cursor-pointer"
                         >
@@ -1254,7 +1297,10 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.filter(p => !p.hidden).slice(0, 4).map((product) => (
+            {(() => {
+              const featured = products.filter(p => !p.hidden && p.featured);
+              const display = featured.length > 0 ? featured.slice(0, 4) : products.filter(p => !p.hidden).slice(0, 4);
+              return display.map((product) => (
               <div
                 key={product.id}
                 className="bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group flex flex-col justify-between"
@@ -1317,18 +1363,13 @@ export default function App() {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            ));
+          })()}
+        </div>
 
           <div className="text-center mt-10">
             <button
-              onClick={() => {
-                setCurrentView("category");
-                setActiveCategory("All");
-                setSearchQuery("");
-                setCurrentPage(1);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+              onClick={() => navigateToCategoryPage("All")}
               className="inline-flex items-center gap-2 bg-[#003399] hover:bg-[#002266] text-white px-6 py-3 rounded-lg font-semibold transition-all text-sm shadow-sm cursor-pointer border-0"
             >
               Browse Full Catalog
@@ -1439,22 +1480,56 @@ export default function App() {
       )}
 
       {/* Brands strip */}
-      <section id="brands" className="bg-[#f0f6fb] border-y border-border py-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-6">
+      <section id="brands" className="bg-[#f0f6fb] border-y border-border py-8 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 mb-4">
+          <div className="text-center">
             <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">
               Authorised Distributor For
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {BRANDS.map((brand) => (
+        </div>
+        <div className="relative w-full overflow-hidden flex items-center animate-marquee-hover-pause">
+          {/* Faders for smooth fading edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#f0f6fb] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#f0f6fb] to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex gap-6 animate-marquee py-2 px-4">
+            {/* First set of brands */}
+            {siteSettings.brands.map((brand, idx) => (
               <div
-                key={brand}
-                className="bg-card border border-border rounded-lg px-3 py-4 flex items-center justify-center text-center hover:border-[#FF9933]/40 hover:shadow-sm transition-all cursor-pointer"
+                key={`brand-1-${idx}`}
+                className="bg-card border border-border rounded-xl px-5 py-4 flex flex-col items-center justify-center gap-2 hover:border-[#FF9933]/40 hover:shadow-sm transition-all cursor-pointer select-none flex-shrink-0 min-w-[170px] min-h-[110px]"
               >
-                <span className="text-[11px] font-semibold text-muted-foreground hover:text-[#FF9933] transition-colors leading-tight">
-                  {brand}
-                </span>
+                <div className="flex items-center justify-center h-10 flex-shrink-0">
+                  {getBrandLogo(brand)}
+                </div>
+                <div className="text-center">
+                  <div className="text-[12px] font-bold text-foreground leading-tight">
+                    {brand}
+                  </div>
+                  <div className="text-[9px] text-muted-foreground uppercase tracking-wider font-semibold">
+                    Partner
+                  </div>
+                </div>
+              </div>
+            ))}
+            {/* Duplicate set of brands for seamless looping */}
+            {siteSettings.brands.map((brand, idx) => (
+              <div
+                key={`brand-2-${idx}`}
+                className="bg-card border border-border rounded-xl px-5 py-4 flex flex-col items-center justify-center gap-2 hover:border-[#FF9933]/40 hover:shadow-sm transition-all cursor-pointer select-none flex-shrink-0 min-w-[170px] min-h-[110px]"
+              >
+                <div className="flex items-center justify-center h-10 flex-shrink-0">
+                  {getBrandLogo(brand)}
+                </div>
+                <div className="text-center">
+                  <div className="text-[12px] font-bold text-foreground leading-tight">
+                    {brand}
+                  </div>
+                  <div className="text-[9px] text-muted-foreground uppercase tracking-wider font-semibold">
+                    Partner
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -1476,7 +1551,7 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
+          {siteSettings.testimonials.map((t) => (
             <div
               key={t.name}
               className="bg-card border border-border rounded-xl p-6 hover:shadow-md transition-shadow"
@@ -1523,7 +1598,7 @@ export default function App() {
               Get a Quote
               <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="tel:+260772071404" className="flex items-center gap-2 border border-white/50 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-sm">
+            <a href={`tel:${siteSettings.company.phone}`} className="flex items-center gap-2 border border-white/50 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors text-sm">
               <Phone className="w-4 h-4" />
               Call Us Now
             </a>
@@ -1532,7 +1607,7 @@ export default function App() {
       </section>
       </> }
 
-      {currentView === "category" && (
+      {(currentView === "category" || currentView === "diagnostics" || currentView === "vials" || currentView === "closures" || currentView === "equipment") && (
         <section id="category-page" className="bg-[#f0f6fb] min-h-[80vh] pb-16">
           {/* Category Hero Banner */}
           <div className={`relative bg-gradient-to-r ${activeCategoryInfo.color} text-white py-12 md:py-16 overflow-hidden`}>
@@ -1586,101 +1661,168 @@ export default function App() {
 
           {/* Main Catalog Area */}
           <div className="max-w-7xl mx-auto px-4 mt-8">
-            <div className="grid lg:grid-cols-[260px_1fr] gap-8 items-start">
+            <div className={currentView === "category" ? "grid lg:grid-cols-[260px_1fr] gap-8 items-start" : "w-full"}>
               {/* Sidebar Filters */}
-              <aside className="bg-white border border-border rounded-xl p-5 shadow-sm space-y-6">
-                <div>
-                  <h3 className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-3">
-                    Departments
-                  </h3>
-                  <div className="space-y-1.5">
-                    <button
-                      onClick={() => {
-                        setActiveCategory("All");
-                        setSearchQuery("");
-                        setCurrentPage(1);
-                      }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
-                        activeCategory === "All"
-                          ? "bg-[#003399] text-white"
-                          : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
-                      }`}
-                    >
-                      <span>All Products</span>
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeCategory === "All" ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
-                        {products.filter((p) => !p.hidden).length}
-                      </span>
-                    </button>
-
-                    {Array.from(new Set(products.map((p) => p.category)))
-                      .filter(Boolean)
-                      .sort()
-                      .map((catName) => {
-                        const isSelected = activeCategory === catName;
-                        const count = products.filter((p) => !p.hidden && p.category === catName).length;
-                        const displayTitle = catName === "Diagnostics" ? "Diagnostic Products" :
-                                             catName === "Lab Consumables" ? "Glass & Plastic Vials" :
-                                             catName === "Equipment" ? "Readers & Equipment" :
-                                             catName === "Hematology" ? "Hematology Reagents" :
-                                             catName === "Reagents" ? "Reagents & Controls" : catName;
-                        return (
-                          <button
-                            key={catName}
-                            onClick={() => {
-                              setActiveCategory(catName);
-                              setSearchQuery("");
-                              setCurrentPage(1);
-                            }}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
-                              isSelected
-                                ? "bg-[#003399] text-white"
-                                : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
-                            }`}
-                          >
-                            <span>{displayTitle}</span>
-                            <span className={`text-[10px] px-2 py-0.5 rounded-full ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
-                              {count}
-                            </span>
-                          </button>
-                        );
-                      })}
-                  </div>
-                </div>
-
-                {/* Subcategories */}
-                {activeCategory !== "All" && subCategories.length > 0 && (
+              {currentView === "category" && (
+                <aside className="bg-white border border-border rounded-xl p-5 shadow-sm space-y-6">
                   <div>
                     <h3 className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-3">
-                      Filter by Type
+                      Departments
                     </h3>
-                    <div className="space-y-1">
-                      {subCategories.map((subName) => {
-                        const isSelected = searchQuery === subName;
+                    <div className="space-y-1.5">
+                      <button
+                        onClick={() => {
+                          setActiveCategory("All");
+                          setSearchQuery("");
+                          setCurrentPage(1);
+                        }}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
+                          activeCategory === "All"
+                            ? "bg-[#003399] text-white"
+                            : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
+                        }`}
+                      >
+                        <span>All Products</span>
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeCategory === "All" ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                          {products.filter((p) => !p.hidden).length}
+                        </span>
+                      </button>
+
+                      {Array.from(new Set(products.map((p) => p.category)))
+                        .filter(Boolean)
+                        .sort()
+                        .map((catName) => {
+                          const isSelected = activeCategory === catName;
+                          const count = products.filter((p) => !p.hidden && p.category === catName).length;
+                          const displayTitle = catName === "Diagnostics" ? "Diagnostic Products" :
+                                               catName === "Lab Consumables" ? "Glass & Plastic Vials" :
+                                               catName === "Equipment" ? "Readers & Equipment" :
+                                               catName === "Hematology" ? "Hematology Reagents" :
+                                               catName === "Reagents" ? "Reagents & Controls" : catName;
+                          return (
+                            <button
+                              key={catName}
+                              onClick={() => {
+                                setActiveCategory(catName);
+                                setSearchQuery("");
+                                setCurrentPage(1);
+                              }}
+                              className={`w-full text-left px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-between transition-all cursor-pointer border-0 ${
+                                isSelected
+                                  ? "bg-[#003399] text-white"
+                                  : "text-muted-foreground bg-transparent hover:bg-[#f0f6fb] hover:text-[#003399]"
+                              }`}
+                            >
+                              <span>{displayTitle}</span>
+                              <span className={`text-[10px] px-2 py-0.5 rounded-full ${isSelected ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"}`}>
+                                {count}
+                              </span>
+                            </button>
+                          );
+                        })}
+                    </div>
+                  </div>
+
+                  {/* Subcategories */}
+                  {activeCategory !== "All" && subCategories.length > 0 && (
+                    <div>
+                      <h3 className="text-xs uppercase tracking-widest text-[#003399] font-bold mb-3">
+                        Filter by Type
+                      </h3>
+                      <div className="space-y-1">
+                        {subCategories.map((subName) => {
+                          const isSelected = searchQuery === subName;
+                          return (
+                            <button
+                              key={subName}
+                              onClick={() => {
+                                setSearchQuery(isSelected ? "" : subName);
+                                setCurrentPage(1);
+                              }}
+                              className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between cursor-pointer border-0 ${
+                                isSelected
+                                  ? "bg-[#FF9933]/15 text-[#FF9933] font-semibold"
+                                  : "text-muted-foreground bg-transparent hover:bg-slate-50 hover:text-[#FF9933]"
+                              }`}
+                            >
+                              <span className="truncate">{subName}</span>
+                              {isSelected && <X className="w-3 h-3 flex-shrink-0 text-[#FF9933]" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </aside>
+              )}
+
+              {/* Product Catalog Grid */}
+              <div className="space-y-6">
+                {/* Horizontal Subcategory pills (only on dedicated department pages) */}
+                {currentView !== "category" && (() => {
+                  let pills: string[] = [];
+                  if (currentView === "diagnostics") {
+                    pills = [
+                      "All",
+                      "Rapid Tests & Devices",
+                      "Blood Grouping Reagents",
+                      "Infectious Disease Tests",
+                      "Drugs of Abuse Tests",
+                      "Urinalysis Strips",
+                      "COVID & Respiratory"
+                    ];
+                  } else if (currentView === "vials") {
+                    pills = [
+                      "All",
+                      "5ml Bottles",
+                      "10ml / 15ml Bottles",
+                      "20ml / 25ml Bottles",
+                      "30ml Bottles",
+                      "50ml Bottles",
+                      "100ml Bottles",
+                      "Other Sizes"
+                    ];
+                  } else if (currentView === "closures") {
+                    pills = [
+                      "All",
+                      "Aluminium Caps",
+                      "Atomisers & Spray Caps",
+                      "Dropper Pipettes",
+                      "Bamboo Range",
+                      "Pots & Jars"
+                    ];
+                  } else if (currentView === "equipment") {
+                    pills = [
+                      "All",
+                      "Readers & Analyzers",
+                      "Biochemical Meters",
+                      "PCR & Accessories"
+                    ];
+                  }
+                  return (
+                    <div className="flex flex-wrap items-center gap-2 pb-2">
+                      {pills.map((subName) => {
+                        const isSelected = subCategoryFilter === subName;
                         return (
                           <button
                             key={subName}
                             onClick={() => {
-                              setSearchQuery(isSelected ? "" : subName);
+                              setSubCategoryFilter(subName);
                               setCurrentPage(1);
                             }}
-                            className={`w-full text-left px-3 py-1.5 rounded-lg text-xs transition-colors flex items-center justify-between cursor-pointer border-0 ${
+                            className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all cursor-pointer ${
                               isSelected
-                                ? "bg-[#FF9933]/15 text-[#FF9933] font-semibold"
-                                : "text-muted-foreground bg-transparent hover:bg-slate-50 hover:text-[#FF9933]"
+                                ? "bg-[#003399] border-[#003399] text-white shadow-sm"
+                                : "bg-white border-border text-muted-foreground hover:bg-slate-50 hover:text-[#003399]"
                             }`}
                           >
-                            <span className="truncate">{subName}</span>
-                            {isSelected && <X className="w-3 h-3 flex-shrink-0 text-[#FF9933]" />}
+                            {subName}
                           </button>
                         );
                       })}
                     </div>
-                  </div>
-                )}
-              </aside>
-
-              {/* Product Catalog Grid */}
-              <div className="space-y-6">
+                  );
+                })()}
                 {/* Controls Bar */}
                 <div className="bg-white border border-border rounded-xl p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="relative w-full sm:max-w-xs">
@@ -1760,6 +1902,7 @@ export default function App() {
                       onClick={() => {
                         setSearchQuery("");
                         setActiveCategory("All");
+                        setSubCategoryFilter("All");
                         setCurrentPage(1);
                       }}
                       className="mt-4 text-xs font-semibold bg-[#003399] text-white px-4 py-2 rounded-lg hover:bg-[#002266] transition-colors cursor-pointer border-0"
@@ -2045,29 +2188,29 @@ export default function App() {
             <p className="text-white/60 mt-2 text-sm">We supply hospitals, clinics and labs across Zambia</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="tel:+260772071404" className="bg-white/10 border border-white/20 rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all group">
+            <a href={`tel:${siteSettings.company.phone}`} className="bg-white/10 border border-white/20 rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all group">
               <div className="w-12 h-12 rounded-full bg-[#FF9933] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Phone className="w-5 h-5 text-white" />
               </div>
               <div className="text-white/60 text-xs uppercase tracking-widest mb-1">Phone</div>
-              <div className="text-white font-semibold text-sm">+260 772 071 404</div>
-              <div className="text-white/60 text-sm mt-1">+260 966 669 767</div>
+              <div className="text-white font-semibold text-sm">{siteSettings.company.phone}</div>
+              {siteSettings.company.phone2 && <div className="text-white/60 text-sm mt-1">{siteSettings.company.phone2}</div>}
             </a>
-            <a href="mailto:sales.chamrud@gmail.com" className="bg-white/10 border border-white/20 rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all group">
+            <a href={`mailto:${siteSettings.company.email}`} className="bg-white/10 border border-white/20 rounded-xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all group">
               <div className="w-12 h-12 rounded-full bg-[#149CD8] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Mail className="w-5 h-5 text-white" />
               </div>
               <div className="text-white/60 text-xs uppercase tracking-widest mb-1">Email</div>
-              <div className="text-white font-semibold text-sm">sales.chamrud@gmail.com</div>
+              <div className="text-white font-semibold text-sm">{siteSettings.company.email}</div>
             </a>
             <div className="bg-white/10 border border-white/20 rounded-xl p-6 flex flex-col items-center text-center">
               <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mb-4">
                 <MapPin className="w-5 h-5 text-white" />
               </div>
               <div className="text-white/60 text-xs uppercase tracking-widest mb-1">Address</div>
-              <div className="text-white font-semibold text-sm">15 Enock Kavu Road</div>
-              <div className="text-white/70 text-sm">Rhodes Park, Lusaka</div>
-              <div className="text-[#FF9933] font-semibold text-sm mt-1">Zambia</div>
+              <div className="text-white font-semibold text-sm">{siteSettings.company.address}</div>
+              <div className="text-white/70 text-sm">{siteSettings.company.city}</div>
+              <div className="text-[#FF9933] font-semibold text-sm mt-1">{siteSettings.company.country}</div>
             </div>
           </div>
 
@@ -2170,15 +2313,15 @@ export default function App() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-white/50 text-xs">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#FF9933]" />
-                  15 Enock Kavu Road, Rhodes Park, Lusaka, Zambia
+                  {siteSettings.company.address}, {siteSettings.company.city}, {siteSettings.company.country}
                 </div>
-                <a href="tel:+260772071404" className="flex items-center gap-2 text-white/50 text-xs hover:text-white/80 transition-colors">
+                <a href={`tel:${siteSettings.company.phone}`} className="flex items-center gap-2 text-white/50 text-xs hover:text-white/80 transition-colors">
                   <Phone className="w-3.5 h-3.5 flex-shrink-0 text-[#FF9933]" />
-                  +260 772 071 404 / +260 966 669 767
+                  {siteSettings.company.phone}{siteSettings.company.phone2 ? ` / ${siteSettings.company.phone2}` : ""}
                 </a>
-                <a href="mailto:sales.chamrud@gmail.com" className="flex items-center gap-2 text-white/50 text-xs hover:text-white/80 transition-colors">
+                <a href={`mailto:${siteSettings.company.email}`} className="flex items-center gap-2 text-white/50 text-xs hover:text-white/80 transition-colors">
                   <Mail className="w-3.5 h-3.5 flex-shrink-0 text-[#FF9933]" />
-                  sales.chamrud@gmail.com
+                  {siteSettings.company.email}
                 </a>
               </div>
             </div>
@@ -2477,6 +2620,7 @@ export default function App() {
           onClose={() => setIsAdminOpen(false)}
           onPostsChange={(updated) => setPosts(updated)}
           onProductsChange={(updated) => setProducts(updated)}
+          onSettingsChange={(updated) => setSiteSettings(updated)}
         />
       )}
     </div>
